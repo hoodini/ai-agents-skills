@@ -213,16 +213,22 @@ Agent Skills work with these AI coding agents:
 
 ---
 
-## �📦 Available Skills
+## 📦 Available Skills
 
 | Skill | Description | Keywords |
 |:------|:------------|:---------|
 | **[aws-agentcore](skills/aws-agentcore/SKILL.md)** | AWS Bedrock AgentCore development patterns | `AgentCore`, `Bedrock Agent`, `AWS agent` |
 | **[aws-strands](skills/aws-strands/SKILL.md)** | Model-agnostic agent framework with Strands SDK | `Strands`, `ReAct agent`, `model-agnostic` |
+| **[aws-account-management](skills/aws-account-management/SKILL.md)** | AWS Organizations, IAM, billing & multi-account | `AWS Organizations`, `IAM`, `SCPs`, `Cost Explorer` |
 | **[langchain](skills/langchain/SKILL.md)** | LangChain/LangGraph pipelines and agent workflows | `LangChain`, `LangGraph`, `RAG`, `LCEL` |
 | **[vercel](skills/vercel/SKILL.md)** | Vercel deployment, serverless, and edge functions | `Vercel`, `serverless`, `edge function` |
 | **[railway](skills/railway/SKILL.md)** | Railway platform deployment and configuration | `Railway`, `deploy container` |
-| **[figma](skills/figma/SKILL.md)** | Figma API integration and design token extraction | `Figma API`, `design tokens` |
+| **[cloudflare](skills/cloudflare/SKILL.md)** | Cloudflare Workers, Pages, D1, R2, KV & AI | `Cloudflare`, `Workers`, `D1`, `R2`, `edge computing` |
+| **[figma](skills/figma/SKILL.md)** | Figma API, component code generation & design tokens | `Figma API`, `design tokens`, `Figma to code` |
+| **[fal-ai](skills/fal-ai/SKILL.md)** | Serverless AI image/video generation with fal.ai | `fal.ai`, `Flux`, `SDXL`, `AI image generation` |
+| **[mongodb](skills/mongodb/SKILL.md)** | MongoDB & Mongoose queries, aggregation pipelines | `MongoDB`, `Mongoose`, `aggregation`, `NoSQL` |
+| **[bun](skills/bun/SKILL.md)** | Bun JavaScript runtime, bundler & test runner | `Bun`, `bun.sh`, `JavaScript runtime` |
+| **[owasp-security](skills/owasp-security/SKILL.md)** | OWASP Top 10 security vulnerabilities & prevention | `OWASP`, `security`, `XSS`, `SQL injection`, `CSRF` |
 | **[shabbat-times](skills/shabbat-times/SKILL.md)** | Jewish calendar data and Shabbat times integration | `Shabbat times`, `Hebcal`, `Zmanim` |
 | **[copilot-docs](skills/copilot-docs/SKILL.md)** | GitHub Copilot custom instructions reference | `copilot-instructions.md` |
 | **[nano-banana-pro](skills/nano-banana-pro/SKILL.md)** | Google Gemini 3 Pro Image generation | `Nano Banana Pro`, `Gemini 3 Pro Image` |
@@ -502,13 +508,25 @@ ai-agents-skills/
 │   │   └── 📄 SKILL.md
 │   ├── 📁 aws-strands/
 │   │   └── 📄 SKILL.md
+│   ├── 📁 aws-account-management/
+│   │   └── 📄 SKILL.md
 │   ├── 📁 langchain/
 │   │   └── 📄 SKILL.md
 │   ├── 📁 vercel/
 │   │   └── 📄 SKILL.md
 │   ├── 📁 railway/
 │   │   └── 📄 SKILL.md
+│   ├── 📁 cloudflare/
+│   │   └── 📄 SKILL.md
 │   ├── 📁 figma/
+│   │   └── 📄 SKILL.md
+│   ├── 📁 fal-ai/
+│   │   └── 📄 SKILL.md
+│   ├── 📁 mongodb/
+│   │   └── 📄 SKILL.md
+│   ├── 📁 bun/
+│   │   └── 📄 SKILL.md
+│   ├── 📁 owasp-security/
 │   │   └── 📄 SKILL.md
 │   ├── 📁 shabbat-times/
 │   │   └── 📄 SKILL.md
