@@ -62,6 +62,7 @@ GSAP is the reliable default for text/motion. Reach for Lottie for *designed* br
    - **Lottie** the brand way → [references/lottie.md](references/lottie.md) + [assets/neural-pulse.json](assets/neural-pulse.json)
    - the **Manim** render as a `<video class="clip" muted playsinline>` body clip
    - GSAP entrances per scene, a neon **flash** transition on each boundary, fade-out only on the final scene
+   - for **teaser / social** pacing (fast hard cuts, kinetic word-slams, a hook montage, glitch/chromatic stabs) → [references/editing.md](references/editing.md) — cut it like a producer, not a slideshow
 5. **Self-verify (gates).** [references/gates.md](references/gates.md): `npx hyperframes lint` (0 errors) → `validate` (0 console errors, WCAG AA) → render → spot-check 5 frames across the timeline. Fix → re-run. Lottie MUST be screenshot-verified (the Skottie-vs-lottie-web trap).
 6. **Render.** `npx hyperframes render --fps 30 --output renders/<name>_FINAL.mp4`. For vertical, clone with a 1080×1920 layout (see `video-edit`).
 
