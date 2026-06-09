@@ -53,7 +53,7 @@ GSAP is the reliable default for text/motion. Reach for Lottie for *designed* br
 ## Workflow
 
 1. **Plan the beats.** Narrative arc + which engine each beat needs. Pick 16:9 and/or 9:16.
-2. **Set the brand.** Ensure `FRAME.md` is in the project root (copy [assets/FRAME.md](assets/FRAME.md)). All colors/fonts/motifs come from it — never invent.
+2. **Set the brand.** Ensure `FRAME.md` is in the project root (copy [assets/FRAME.md](assets/FRAME.md)). All colors/fonts/motifs come from it — never invent. **Three brand must-haves on every video** (see [references/brand-kit.md](references/brand-kit.md) + [references/cinematic.md](references/cinematic.md)): the **real phoenix logo** ([assets/logo-phoenix.png](assets/logo-phoenix.png)) at the reveal + end card, a **real featured Lottie** (generate one — [assets/lottie-burst-generator.py](assets/lottie-burst-generator.py)), and the **link end-card** (logo + "LET'S FLY HIGH" + the full link set + CTA). For teaser/social pacing see [references/editing.md](references/editing.md); for psychological/cliffhanger/FOMO cuts see [references/cinematic.md](references/cinematic.md).
 3. **Pre-render the asset beats first** (so they exist as clips):
    - **Manim** → [references/manim.md](references/manim.md) + [assets/manim-scene-template.py](assets/manim-scene-template.py). Render `py -m manim render -qh --fps 30 scene.py SceneName`, copy the MP4 into `assets/`.
    - **Captions/TTS** → reuse the `video-edit` skill (transcribe → approve webapp → sync) and `npx hyperframes tts`.
