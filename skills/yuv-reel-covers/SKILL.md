@@ -20,8 +20,7 @@ templates in `gen_cover.py`: **`editorial`** (giant skewed condensed type front/
 ✦ ticker strips, power-word stack + line icons, neon yellow `#E9FF3D` on vivid sky/sunset/ink) and
 **`cinema`** (pink/cyan split-light duotone, white type behind the head). Auto-fits type to width,
 Hebrew (Rubik 900) and English (Anton) both supported.
-- **Cover Studio app** — [cover-studio.html](cover-studio.html): self-contained, double-click to
-  open. Drop photo + cutout, type headline, live preview, Export 1080×1920 / 1080×1350 PNG.
+- **Cover Studio app** — LIVE at https://hoodini.github.io/yuv-cover-studio/ (also [cover-studio.html](cover-studio.html) for offline). Drop photo + cutout, type headline, live preview, Export 1080×1920 / 1080×1350 PNG.
   Includes an **AI PROMPTS tab** that writes Midjourney/Flux/Nano-Banana-2 prompts in the exact
   style ([prompts.md](prompts.md) has the master formulas + the hybrid pipeline).
 - Headless: `py gen_cover.py editorial --bg sky --cutout assets/yuval-cutout.png --back "STEAL MY|PROMPTS" --ticker "ALL DAY,EVERY PLAY,NO LIMITS" --stack "FOCUS,ENERGY,DISCIPLINE,VICTORY" --tag "AI" --cut-h 1060 --out my-cover`
@@ -63,3 +62,4 @@ A default cutout of Yuval (studio) ships in `assets/yuval-cutout.png`.
    nothing critical above y=285 or below y=1635.
 6. Hebrew glyphs come from the bundled Rubik subset — exotic punctuation may be missing; refetch with
    builders/fetch_hebrew_fonts.py from yuv-video-director if needed.
+
