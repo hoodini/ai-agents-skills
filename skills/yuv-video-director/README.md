@@ -90,6 +90,15 @@ assets/
   phoenix-burst.json / neural-pulse.json
   what_is_nn.py                   ★ neuron→network→training ManimCE scene (34.5s)
   manim-scene-template.py         brain-vs-network ManimCE scene
+  builders/                       ★ ready-to-run playbook builders:
+    gen_news.py                     karaoke-caption + director-beats composition builder
+    news-template-16x9.tpl /        the Channel-12 playbook templates (both ratios)
+    news-template-9x16.tpl
+    gen_explainer.py +              explainer composition builder (takes Manim duration)
+    explainer-template.tpl
+    gen_music_bed.py /              synthesized music: calm bed / teaser drive
+    gen_music_teaser.py
+    fetch_hebrew_fonts.py           full-alphabet Rubik woff2 fetcher (renderer can't auto-resolve)
   neural-net-field.js             seekable neural-net phoenix canvas background
   FRAME.md                        Neon Phoenix video frame spec
   logo-phoenix.png / Anton-Regular.woff2
