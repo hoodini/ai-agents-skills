@@ -12,7 +12,21 @@ description: >
 # yuv-reel-covers
 
 Unified Reel-cover system so the Instagram grid reads as ONE brand. Canvas 1080×1920, all key
-content inside the **3:4 grid-crop safe zone (y 285–1635)**. Two templates, one DNA.
+content inside the **3:4 grid-crop safe zone (y 285–1635)**.
+
+## v2 — Editorial Poster system (THE standard; read [style-spec.md](style-spec.md) first)
+Reverse-engineered from the SHELLY sports-editorial + cinematic posters Yuval loves. Two new
+templates in `gen_cover.py`: **`editorial`** (giant skewed condensed type front/behind the cutout,
+✦ ticker strips, power-word stack + line icons, neon yellow `#E9FF3D` on vivid sky/sunset/ink) and
+**`cinema`** (pink/cyan split-light duotone, white type behind the head). Auto-fits type to width,
+Hebrew (Rubik 900) and English (Anton) both supported.
+- **Cover Studio app** — [cover-studio.html](cover-studio.html): self-contained, double-click to
+  open. Drop photo + cutout, type headline, live preview, Export 1080×1920 / 1080×1350 PNG.
+  Includes an **AI PROMPTS tab** that writes Midjourney/Flux/Nano-Banana-2 prompts in the exact
+  style ([prompts.md](prompts.md) has the master formulas + the hybrid pipeline).
+- Headless: `py gen_cover.py editorial --bg sky --cutout assets/yuval-cutout.png --back "STEAL MY|PROMPTS" --ticker "ALL DAY,EVERY PLAY,NO LIMITS" --stack "FOCUS,ENERGY,DISCIPLINE,VICTORY" --tag "AI" --cut-h 1060 --out my-cover`
+
+## v1 templates (`behind` / `stack`) — legacy, still available below.
 
 ## The formula (what makes the grid uniform)
 - **Always**: rich-black `#0A0A0A` ground + dim neural-net field + vignette. Never white, never a raw screenshot.
