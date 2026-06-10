@@ -34,3 +34,16 @@ HyperFrames render — not just the Skottie preview.**
 HyperFrames' lottie adapter seeks each `__hfLottie` entry to composition time via
 `goToAndStop(t·1000, false)`. Don't call `.play()`. Keep the container size stable.
 For dotLottie (`.lottie`), use `DotLottie` + `setCurrentRawFrameValue`; it must be pushed manually.
+
+## ⚠️ Seek-clamp gotcha (sections later than the lottie's duration)
+The adapter seeks to COMPOSITION time — if a section starts at 55s but the lottie's total
+duration is 35s, lottie-web clamps to the LAST frame (often an invisible cycle-start pose).
+Fix: wrap `goToAndStop` with a deterministic modulo (see the `L()` helper in
+[teaser-explainer.md](teaser-explainer.md) — use it in every composition; harmless when not needed).
+
+## Content-synced beats + transparency (the standard)
+Lotties must illustrate the SPOKEN content at the exact moment it's said — director-timed beats,
+fully transparent (no chip/box; drop-shadow only), persistent+continuous design so any window
+reads. Six production-grade content animations + their generator are bundled:
+[../assets/gen_content_lotties.py](../assets/gen_content_lotties.py). Verify transparency by
+rendering the test grid over an odd-colored background. Full method: [teaser-explainer.md](teaser-explainer.md).

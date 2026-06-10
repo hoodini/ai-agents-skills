@@ -39,7 +39,8 @@ same input → same output). So every visual is one of two kinds:
 ## Route each beat to an engine
 
 ```
-"explain a concept / math / neural network / algorithm / training"  → ManimCE   (pre-rendered clip)
+"explain X as a TEASER/promo (FOMO, cliffhanger, fast)"              → references/teaser-explainer.md (the formula)
+"explain a concept / math / neural network / algorithm / training"  → ManimCE   (pre-rendered clip — cut into BURSTS for teasers)
 "branded motion: logo sting · stat reveal · icon pop · pulse"        → Lottie    (live, lottie-web)
 "kinetic captions · titles · reveals · transitions · data callouts"  → GSAP      (live)  ← default
 "3D / spatial"                                                       → Three.js  (live)   (Babylon NOT used)
@@ -77,9 +78,13 @@ See [references/prereqs.md](references/prereqs.md). Need **Node 22+**, **FFmpeg*
 | [assets/FRAME.md](assets/FRAME.md) | YUV.AI Neon Phoenix video frame spec (rebranded from HeyGen's Coral pack) |
 | [assets/neural-net-field.js](assets/neural-net-field.js) | Deterministic, seekable neural-net phoenix canvas background |
 | [assets/neural-pulse.json](assets/neural-pulse.json) | Hand-authored Bodymovin Lottie (renders in lottie-web, not just Skottie) |
+| [assets/gen_content_lotties.py](assets/gen_content_lotties.py) | Generator for 6 production-grade CONTENT lotties (WhatsApp-collapse, decode-beam, eye-read, ghost-line hero, orb-extract, brain-fire) — transparent, persistent+continuous, lottie-web verified |
+| assets/{wa-collapse,decode-beam,eye-read,ghost-line,orb-extract,brain-fire}.json | The 6 generated content lotties, ready to drop in |
 | [assets/manim-scene-template.py](assets/manim-scene-template.py) | ManimCE scene template, neon brand styling, Text-only (no LaTeX) |
+| [assets/what_is_nn.py](assets/what_is_nn.py) | "What is a neural network" ManimCE scene (neuron → network → training, 34.5s) |
 | [assets/Anton-Regular.woff2](assets/Anton-Regular.woff2) | Local Anton (renderer doesn't auto-resolve it; declare `@font-face`) |
 | [references/composition-pattern.md](references/composition-pattern.md) | The full multi-engine `index.html` pattern (field + Lottie + Manim clip + GSAP + flash) |
+| [references/teaser-explainer.md](references/teaser-explainer.md) | The cinematic teaser-explainer formula: cold-open slams → manim BURSTS → face-off → FOMO montage → cliffhanger; content-synced transparent lottie beats; the seek-modulo fix; teaser music synth |
 
 ## Companion skills
 
