@@ -168,6 +168,7 @@ git clone --depth 1 --sparse \
   https://github.com/hoodini/ai-agents-skills "$CLONE_TMP" >/dev/null 2>&1
 ( cd "$CLONE_TMP" && git sparse-checkout set \
     skills/yuv-pilot \
+    skills/director \
     skills/yuv-decks \
     skills/yuv-viral-video \
     skills/yuv-design-system \
@@ -177,7 +178,7 @@ git clone --depth 1 --sparse \
     skills/nano-banana-pro \
     skills/mermaid-diagrams >/dev/null 2>&1 )
 
-for skill in yuv-pilot yuv-decks yuv-viral-video yuv-design-system video-edit video-to-landing-page parallax-landing-page nano-banana-pro mermaid-diagrams; do
+for skill in yuv-pilot director yuv-decks yuv-viral-video yuv-design-system video-edit video-to-landing-page parallax-landing-page nano-banana-pro mermaid-diagrams; do
   if [ -d "$HOME/.claude/skills/$skill" ]; then
     info "$skill already exists — refreshing"
     rm -rf "$HOME/.claude/skills/$skill"
@@ -194,6 +195,7 @@ step "Creating cross-tool symlinks for the YUV.AI pyramid"
 
 PYRAMID_SKILLS=(
   yuv-pilot
+  director
   yuv-design-system
   yuv-decks
   yuv-viral-video

@@ -23,7 +23,7 @@
 curl -sSL https://raw.githubusercontent.com/hoodini/ai-agents-skills/master/install.sh | bash
 ```
 
-Installs **15 skills** as one package: **yuv-pilot** (top-of-pyramid orchestrator) · **yuv-design-system** (brand) · **yuv-decks** (cinematic presentations) · **yuv-viral-video** (short-form) · **video-edit** · **video-to-landing-page** · **parallax-landing-page** · **hyperframes** + 4 companions · **nano-banana-pro** (AI images) · **mermaid-diagrams**. Plus ffmpeg / Node / Python / faster-whisper / hyperframes CLI / Python venvs / cross-tool symlinks to ~/.copilot/skills + ~/.agents/skills. Works on macOS, Linux, Windows (Git Bash/WSL).
+Installs **16 skills** as one package: **director** (award-winning film + AI-production Bible, story-first workflow) · **yuv-pilot** (top-of-pyramid orchestrator) · **yuv-design-system** (brand) · **yuv-decks** (cinematic presentations) · **yuv-viral-video** (short-form) · **video-edit** · **video-to-landing-page** · **parallax-landing-page** · **hyperframes** + 4 companions · **nano-banana-pro** (AI images) · **mermaid-diagrams**. Plus ffmpeg / Node / Python / faster-whisper / hyperframes CLI / Python venvs / cross-tool symlinks to ~/.copilot/skills + ~/.agents/skills. Works on macOS, Linux, Windows (Git Bash/WSL).
 
 After install, restart your agent and just type what you want:
 
@@ -549,6 +549,7 @@ Agent Skills work with these AI coding agents:
 
 | Skill | Description | Keywords |
 |:------|:------------|:---------|
+| **[director](skills/director/SKILL.md)** 🆕 | Award-winning director's brain — a 28-chapter film + AI-production Bible (~108k words) wrapped in a gated, interrogation-first workflow that locks the IDEA and SCRIPT before generating a single pixel, then plans shots/camera/light/sound, then generates. Honest neuroscience (no dopamine-as-pleasure myths), current AI image/video model selection, character-consistency SOP, first/last-frame keyframing | `director`, `video`, `film`, `teaser`, `trailer`, `storyboard`, `script`, `screenwriting`, `documentary`, `סרטון`, `טיזר`, `תסריט`, `סטוריבורד` |
 | **[yuv-design-system](skills/yuv-design-system/SKILL.md)** 🆕 | Yuv's canonical visual brand — Fly High purple (default) + Warm Editorial pink, Anton/Inter + Rubik/Assistant, signature components, brand assets, canonical bio/links, 15 hardened production patterns | `design system`, `brand`, `Fly High`, `Warm Editorial`, `Anton`, `Rubik`, `PurpleBar`, `YellowUnderline`, `FlightHUD`, `yuv.ai` |
 | **[yuv-decks](skills/yuv-decks/SKILL.md)** 🆕 | Open-slide cinematic deck builder — 4-act narrative arc, Yuval voice, JourneyBar, reusable templates, automatic nano-banana + Hyperframes orchestration | `deck`, `presentation`, `slides`, `talk`, `keynote`, `open-slide`, `cinematic deck`, `מצגת`, `שקפים` |
 | **[yuv-viral-video](skills/yuv-viral-video/SKILL.md)** | Short-form video editor — liquid-glass cards, dark-mode, MrBeast-paced cuts, karaoke captions, ALWAYS 9:16 + 16:9, never covers the speaker's face | `viral video`, `reel`, `short`, `selfie edit`, `liquid glass`, `karaoke captions`, `ויראלי`, `ריל` |
