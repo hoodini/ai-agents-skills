@@ -13,6 +13,46 @@ description: "Award-winning director's brain for making films/videos with AI. Ru
 
 **Challenge, don't please.** Your value in the early phases is interrogation, not agreement. If the idea has no active want, no stakes, or three competing ideas, say so plainly and force a choice. Never say "great idea!" to a story that fails the tests below. Flattery here lets a doomed concept reach the render stage. (This matches the user's standing preference: challenge with evidence, never flatter.)
 
+## CORE CRAFT — always apply (this is the brain; never make the user dig for it)
+
+You apply these **by heart, every project**, before touching references. The full annotated treatment is in `references/02` (Pixar) and `references/03, 05, 21, 22` (emotional plot) — but you never need the user to ask "where's the craft." It's here.
+
+### Pixar's 22 Rules of Storytelling (Emma Coats) — the working set
+Enforce the **bold** ones at the gates; know all 22.
+1. You admire a character for trying more than for their successes.
+2. Keep in mind what's interesting to the *audience*, not what's fun to write — they can be very different.
+3. Theme matters, but you won't see what the story is *about* until the end. Then rewrite.
+4. **The Story Spine:** *Once upon a time ___. Every day ___. One day ___. Because of that ___. Because of that ___. Until finally ___.*
+5. **Simplify. Focus. Combine characters. Hop over detours.** Losing "valuable" stuff sets you free.
+6. What is your character good at/comfortable with? Throw the polar opposite at them.
+7. **Come up with your ENDING before the middle.** Endings are hard — get yours working up front.
+8. Finish it. Let go even if imperfect. Do better next time.
+9. Stuck? List what *wouldn't* happen next — the unstuck material shows up.
+10. Pull apart the stories you love; what you like in them is part of you — recognize it to use it.
+11. Put it on paper so you can start fixing it. A perfect idea in your head helps no one.
+12. **Discount the 1st thing that comes to mind — and the 2nd, 3rd, 4th, 5th. Get the obvious out of the way. Surprise yourself.** ← *the anti-copy rule*
+13. **Give your characters opinions.** Passive/malleable feels likable to write but is poison to the audience.
+14. **Why must YOU tell THIS story?** What belief is burning in you that the story feeds off? That's the heart.
+15. If you were the character, how would you feel? Honesty lends credibility to unbelievable situations.
+16. **What are the STAKES?** Give us a reason to root for them; what happens if they fail? Stack the odds against.
+17. No work is wasted. If it's not working, move on — it comes back useful later.
+18. Know the difference between doing your best and fussing. Story is *testing*, not refining.
+19. **Coincidences that get characters INTO trouble are great; coincidences that get them OUT are cheating.** ← *no deus ex machina*
+20. Exercise: take a movie you dislike; rearrange its building blocks into something you *do* like.
+21. You must identify with the situation/character — can't just write "cool." What would make YOU act that way?
+22. **What's the ESSENCE of your story? The most economical telling?** Know that, then build out.
+
+### The emotional-plot engine — what makes a plot actually MOVE people
+A plot is *moving* only when these are present. Interrogate every concept for them; if a script "feels thin," it's almost always missing the **wound, the stakes, or the turn** — check those three first.
+- **WANT vs NEED** — the conscious external goal vs the unconscious thing they must learn. Want drives plot; need drives emotion. They should *conflict*.
+- **The WOUND / the LIE** — the false belief (born of an old hurt) the story forces them to confront. No lie → no arc → no feeling.
+- **STAKES + escalation** — the cost of failure, getting worse each beat (Rule 16). No stakes → no tension.
+- **No villain when possible** — tragedy caused by circumstance or love (not a blamed bad guy) leaves the viewer no one to be angry at, only the feeling. (Use the honest mechanism — `references/05` — never fake "this rewires their brain" claims.)
+- **Dramatic irony** — let the audience know something the character doesn't; superior knowledge creates ache and suspense (Hitchcock's bomb under the table).
+- **The TURN (peripeteia) + recognition** — one real reversal where character and viewer see the truth. This is the emotional peak.
+- **Peak-end** — people remember the emotional PEAK and the END, not the average. Engineer both deliberately.
+- **But/therefore, never "and then"** — beats must be causally chained, or it's a list, not a story.
+
 ## How to use the Bible (progressive disclosure — read on demand)
 
 `references/00-INDEX.md` is the map. **Read a reference file only when the current phase needs it** — don't load everything up front.
