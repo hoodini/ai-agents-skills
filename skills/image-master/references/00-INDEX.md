@@ -15,6 +15,7 @@ The `SKILL.md` carries the load-bearing core you apply **by heart**. These chapt
 | `09-magazine-cover-treatment.md` | Editorial cover layer: composite-type workflow, caption craft (kicker+headline), the design-system lock, IP safety, the worked "WITNESS" captions | Adding a magazine masthead + short stylized caption to each image |
 | `10-directing-emotion.md` | The decisive emotional moment, animal affect cues, the signature heart-breaking micro-detail, the war-in-the-eye device, the emotion gate | Making a frame ACHE — when output is technically clean but neutral/dead |
 | `11-finishing-layer.md` | The 10/10 difference-makers: wet-eye layered reflections, eye-muscle expression, real tear physics, strand-level fur + selective focus, true non-airbrushed colour, the honest emotional hooks (gaze, neoteny, identifiable victim), the FINISHING STACK clause | Pushing a near-final image from 9 to 10 — indistinguishable-from-real + maximum emotional pull |
+| `12-award-winning-composition.md` | What wins photo contests (10 common denominators) + the stop-scroll techniques (scale juxtaposition, eye-mirror & water reflections, unusual angles, layering, subject-breaks-text-plane depth cover, decisive moment, gaze, selective focus, colour) + the Range+Vision portfolio strategy | Designing world-class, contest-winning concepts with sophistication, depth, and range |
 
 **The master rule across every chapter:** prompt toward *specific photographic reality*, away from the *retouched-stock average*; describe what you DO want, not what you forbid.
 

@@ -23,6 +23,12 @@ Headline *names* the frame; kicker makes you *feel* it. Both must read at thumbn
 - **Aspect — treat the set as ONE MAGAZINE FEATURE:** each image is a PAGE in one photo-essay, so a consistent **4:5 portrait** is correct and premium (cohesive grid, the lockup reads cleanly). Cinematic power comes from light, grade and composition — not from a wide ratio. Option: render the 1–2 most epic establishing frames as 16:9 "opening spreads" if you want a wide cinematic beat, but keep the spine 4:5 for cohesion.
 - **Photo is sacred:** keep all type in the reserved negative space (clear top band, lower-third scrim, corner) — never occlude the animal. The photograph carries the craft score.
 
+## Subject breaks the text plane — the 3D depth cover (premium trick)
+The Vanity-Fair / movie-poster move: the subject OVERLAPS the title so part of it is IN FRONT of the letters and part BEHIND — the text stops being a flat sticker and becomes a physical middle layer. Occlusion is the brain's #1 depth cue → instant premium 3D.
+**AI renders text on ONE flat layer by default**, so you must STATE THE OCCLUSION EXPLICITLY in the prompt:
+> `The large bold title "THROUGH THEIR EYES" sits across the upper-middle of the frame. The animal's head and ears overlap and partly cover the bottom of the letters (in front of the text), while the rest of the title passes BEHIND the animal's body — the title sits on a middle depth plane between the subject (foreground) and the background. A faint shadow of the animal falls across the letters.`
+Rules: keep the overlap PARTIAL and believable (head / ear / shoulder / a raised paw crossing the letters, not the whole word buried); ONE title, ONE crossover point; match the type's lighting and a faint cast shadow to the scene. Reve (layout-first), Nano Banana and Flux do this; Midjourney can't. If the model flattens it, regenerate with the occlusion stated as its own separate sentence.
+
 ## Worked captions — the LOCKED text system (the animal-war feature)
 Every page carries the SAME lockup, only the photo + headline change:
 - **Masthead title (top):** `THROUGH THEIR EYES`
