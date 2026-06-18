@@ -124,6 +124,7 @@ The brief rewards **range across style, setting, and discipline** — so a SET n
 | Directing emotion, expression, and the heart-wrenching micro-detail (so frames aren't neutral/dead) | `references/10-directing-emotion.md` |
 | The 10/10 finishing layer — wet-eye reflections, tear physics, strand-level fur, true colour, the honest brain hooks | `references/11-finishing-layer.md` |
 | What wins photo contests + the stop-scroll techniques (scale, reflections, angles, depth-cover, decisive moment) + portfolio strategy | `references/12-award-winning-composition.md` |
+| Conceptual / message-driven images (irony, role-reversal, juxtaposition, self-confrontation) + the DE-BRAND/IP disqualifier rule + English-text-only | `references/13-conceptual-message-images.md` |
 
 ## Tool note
 Default target is whatever the user names; **Reve 2.0** is the contest tool — layout-first, native 4K, best-in-class legible text, extreme prompt adherence, but weak on dense multi-subject scenes / liquids / crowds and it ignores negatives. Lean into 1–2 hero subjects and **edit the one weak element rather than re-rolling.** Full per-tool quirks in `references/06`.
