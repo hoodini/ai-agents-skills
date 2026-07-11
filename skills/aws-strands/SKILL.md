@@ -1,255 +1,148 @@
 ---
 name: aws-strands
-description: Build AI agents with Strands Agents SDK. Use when developing model-agnostic agents, implementing ReAct patterns, creating multi-agent systems, or building production agents on AWS. Triggers on Strands, Strands SDK, model-agnostic agent, ReAct agent.
+description: Build AI agents with the Strands Agents SDK - the open-source framework (the agent "brain") for writing agent logic, tools, and multi-agent systems in Python. Model-agnostic, AWS Bedrock by default. Covers Agent, the @tool decorator, model providers (BedrockModel), multi-agent patterns (agents-as-tools, Swarm, Graph), conversation management, and streaming. Every import verified against official Strands docs. To DEPLOY a Strands agent on AWS, use the aws-harness skill. Triggers on Strands, Strands Agents, Strands SDK, agent framework, agents as tools, Swarm, Graph multi-agent, BedrockModel.
 ---
 
 # Strands Agents SDK
 
-Build model-agnostic AI agents with the Strands framework.
+The open-source framework you write an agent's logic in - the "brain." Model-agnostic, AWS Bedrock by default. Runs anywhere (laptop, container, Lambda, EC2).
 
-## Installation
+> **How this fits with the other AWS skill:** Strands is the FRAMEWORK (what your agent does). To HOST and DEPLOY a Strands agent on AWS, use [aws-harness](../aws-harness/SKILL.md) (the AgentCore runtime). They compose: write with Strands, ship with AgentCore. You can also run Strands with no AWS deployment at all.
+
+## Install
 
 ```bash
 pip install strands-agents strands-agents-tools
-# Or with npm
-npm install @strands-agents/sdk
 ```
+
+(A TypeScript SDK also exists - see the docs. Examples below are Python.)
 
 ## Quick Start
 
 ```python
 from strands import Agent
-from strands.tools import tool
 
-@tool
-def get_weather(city: str) -> str:
-    """Get current weather for a city."""
-    # Implementation
-    return f"Weather in {city}: 72°F, Sunny"
-
-agent = Agent(
-    model="anthropic.claude-3-sonnet",
-    tools=[get_weather]
-)
-
-response = agent("What's the weather in Seattle?")
-print(response)
+agent = Agent()                       # defaults to Bedrock, Claude 4 Sonnet
+print(agent("What is the capital of France?"))
 ```
 
-## TypeScript/JavaScript
+`agent(...)` returns an `AgentResult`. `str(result)` gives the text; `result.message` is the structured dict (`role` + `content`).
 
-```typescript
-import { Agent, tool } from '@strands-agents/sdk';
+## Model configuration
 
-const getWeather = tool({
-  name: 'get_weather',
-  description: 'Get current weather for a city',
-  parameters: {
-    city: { type: 'string', description: 'City name' }
-  },
-  handler: async ({ city }) => {
-    return `Weather in ${city}: 72°F, Sunny`;
-  }
-});
-
-const agent = new Agent({
-  model: 'anthropic.claude-3-sonnet',
-  tools: [getWeather]
-});
-
-const response = await agent.run('What\'s the weather in Seattle?');
-```
-
-## Model Agnostic
-
-Strands works with any LLM:
+Bedrock is the default provider and no model argument is needed - Strands picks a region-appropriate Claude 4 Sonnet. To override, pass a model id string or a `BedrockModel` provider:
 
 ```python
 from strands import Agent
+from strands.models import BedrockModel
 
-# Anthropic (default)
-agent = Agent(model="anthropic.claude-3-sonnet")
+# Simple: a Bedrock model id (copy the exact id from the Bedrock model catalog)
+agent = Agent(model="<your-bedrock-model-id>")
 
-# OpenAI
-agent = Agent(model="openai.gpt-4o")
-
-# Amazon Bedrock
-agent = Agent(model="amazon.titan-text-premier")
-
-# Custom endpoint
-agent = Agent(
-    model="custom",
-    endpoint="https://your-model-endpoint.com",
-    api_key="..."
-)
+# Full control:
+agent = Agent(model=BedrockModel(
+    model_id="<your-bedrock-model-id>",
+    temperature=0.3,
+    region_name="us-west-2",
+))
 ```
 
-## Tool Definition Patterns
+Strands is model-agnostic - other providers (Anthropic direct, OpenAI, etc.) are available via their own provider classes; see the model-providers docs.
 
-### Decorator Style
+## Custom tools
+
+The `@tool` decorator turns a function into something the model can call. The **docstring is read by the model** (first paragraph = description, `Args:` = parameter docs):
+
 ```python
-from strands.tools import tool
+from strands import Agent, tool
 
 @tool
-def search_database(query: str, limit: int = 10) -> list[dict]:
-    """Search the product database.
-    
+def word_count(text: str) -> str:
+    """Count the number of words in a piece of text.
+
     Args:
-        query: Search query string
-        limit: Maximum results to return
+        text: The text to analyze.
     """
-    # Implementation
-    return results
+    return f"{len(text.split())} words"
+
+agent = Agent(tools=[word_count])
 ```
 
-### Class Style
-```python
-from strands.tools import Tool
+Return recoverable strings on failure (`"Error: ... ask the user to rephrase"`) instead of raising - the model reads the return value and can recover.
 
-class DatabaseSearchTool(Tool):
-    name = "search_database"
-    description = "Search the product database"
-    
-    def parameters(self):
-        return {
-            "query": {"type": "string", "description": "Search query"},
-            "limit": {"type": "integer", "default": 10}
-        }
-    
-    def run(self, query: str, limit: int = 10):
-        return self.db.search(query, limit)
+## Prebuilt tools
+
+```python
+from strands_tools import calculator   # from the strands-agents-tools package
+agent = Agent(tools=[calculator])
 ```
 
-## ReAct Pattern
+## Multi-agent patterns
 
-Built-in ReAct (Reasoning + Acting) support:
-
-```python
-from strands import Agent, ReActStrategy
-
-agent = Agent(
-    model="anthropic.claude-3-sonnet",
-    tools=[search_tool, calculate_tool],
-    strategy=ReActStrategy(
-        max_iterations=10,
-        verbose=True
-    )
-)
-
-# Agent will reason through complex multi-step tasks
-response = agent("""
-    Find the top 3 products in our database, 
-    calculate their average price,
-    and recommend if we should adjust pricing.
-""")
-```
-
-## Multi-Agent Systems
+Three verified patterns. Start with **agents-as-tools** (simplest delegation): wrap an agent in a `@tool`.
 
 ```python
-from strands import Agent, MultiAgentOrchestrator
+from strands import Agent, tool
 
-# Specialist agents
-researcher = Agent(
-    name="researcher",
-    model="anthropic.claude-3-sonnet",
-    tools=[web_search, document_reader],
-    system_prompt="You are a research specialist."
-)
-
-analyst = Agent(
-    name="analyst",
-    model="anthropic.claude-3-sonnet",
-    tools=[data_analyzer, chart_generator],
-    system_prompt="You are a data analyst."
-)
-
-writer = Agent(
-    name="writer",
-    model="anthropic.claude-3-sonnet",
-    tools=[document_writer],
-    system_prompt="You are a technical writer."
-)
-
-# Orchestrator
-orchestrator = MultiAgentOrchestrator(
-    agents=[researcher, analyst, writer],
-    routing="supervisor"  # or "round_robin", "intent"
-)
-
-response = orchestrator.run(
-    "Research AI trends, analyze the data, and write a report"
-)
-```
-
-## Streaming Responses
-
-```python
-from strands import Agent
-
-agent = Agent(model="anthropic.claude-3-sonnet")
-
-# Stream response
-for chunk in agent.stream("Explain quantum computing"):
-    print(chunk, end="", flush=True)
-```
-
-## Memory Management
-
-```python
-from strands import Agent
-from strands.memory import ConversationMemory, SemanticMemory
-
-agent = Agent(
-    model="anthropic.claude-3-sonnet",
-    memory=[
-        ConversationMemory(max_turns=10),
-        SemanticMemory(embedding_model="text-embedding-3-small")
-    ]
-)
-
-# Memory persists across calls
-agent("My name is Alice")
-agent("What's my name?")  # Remembers: "Your name is Alice"
-```
-
-## AgentCore Integration
-
-Use Strands with AWS Bedrock AgentCore:
-
-```python
-from strands import Agent
-from strands.tools import tool
-import boto3
-
-agentcore_client = boto3.client('bedrock-agentcore')
+researcher = Agent(system_prompt="You research topics thoroughly.")
 
 @tool
-def query_cloudwatch(metric_name: str, namespace: str) -> dict:
-    """Query CloudWatch metrics via AgentCore Gateway."""
-    return agentcore_client.invoke_tool(
-        tool_name="cloudwatch_query",
-        parameters={"metric": metric_name, "namespace": namespace}
-    )
+def research(query: str) -> str:
+    """Delegate a research question to the research specialist."""
+    return str(researcher(query))     # str(AgentResult) = the text output
 
-agent = Agent(
-    model="anthropic.claude-3-sonnet",
-    tools=[query_cloudwatch]
-)
+coordinator = Agent(tools=[research])
+coordinator("Research the history of espresso and summarize it.")
 ```
 
-## Official Use Cases
+For structured orchestration, use `Swarm` (agents hand off to each other dynamically) or `Graph` (a deterministic DAG where one node's output feeds the next):
 
-Strands is featured in AWS AgentCore samples:
+```python
+from strands.multiagent import Swarm, GraphBuilder
 
-**A2A Multi-Agent Incident Response**: Uses Strands for monitoring agent
-```bash
-cd amazon-bedrock-agentcore-samples/02-use-cases/A2A-multi-agent-incident-response
-# Monitoring agent uses Strands SDK for CloudWatch, logs, metrics
+# Swarm - dynamic handoffs
+swarm = Swarm([researcher, writer, editor])
+swarm("Draft and polish an article about espresso.")
+
+# Graph - deterministic pipeline
+builder = GraphBuilder()
+builder.add_node(researcher, "research")
+builder.add_node(writer, "write")
+builder.add_edge("research", "write")     # research output -> writer input
+graph = builder.build()
+graph("Write an article about espresso.")
 ```
+
+See the multi-agent docs for the full Graph/Swarm API.
+
+## Conversation management (context window)
+
+Strands manages the conversation window for you (this is NOT long-term memory). The default is a sliding window:
+
+```python
+from strands import Agent
+from strands.agent.conversation_manager import SlidingWindowConversationManager
+
+agent = Agent(conversation_manager=SlidingWindowConversationManager(window_size=20))
+```
+
+For durable, cross-session memory, use AgentCore Memory (see [aws-harness](../aws-harness/SKILL.md)) or the memory tools in `strands-agents-tools`.
+
+## Streaming
+
+```python
+async for event in agent.stream_async("Explain quantum computing"):
+    print(event)
+```
+
+## Deploy on AWS
+
+Strands runs anywhere. To put a Strands agent on AWS as a serverless endpoint with managed memory, identity, and observability, use the AgentCore harness: **[aws-harness](../aws-harness/SKILL.md)**.
 
 ## Resources
 
-- **Official Samples**: https://github.com/awslabs/amazon-bedrock-agentcore-samples
-- **A2A Use Case**: https://github.com/awslabs/amazon-bedrock-agentcore-samples/tree/main/02-use-cases/A2A-multi-agent-incident-response
-- **Integrations**: https://github.com/awslabs/amazon-bedrock-agentcore-samples/tree/main/03-integrations
+- Strands docs: https://strandsagents.com/
+- Python quickstart: https://strandsagents.com/docs/user-guide/quickstart/python/
+- Multi-agent patterns: https://strandsagents.com/docs/user-guide/concepts/multi-agent/multi-agent-patterns/
+- Model providers: https://strandsagents.com/docs/user-guide/concepts/model-providers/
+- GitHub: https://github.com/strands-agents/sdk-python

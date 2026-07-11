@@ -561,8 +561,7 @@ Agent Skills work with these AI coding agents:
 | **[google-workspace-cli](skills/google-workspace-cli/SKILL.md)** 🆕 | Google Workspace CLI (`gws`) — Drive, Gmail, Calendar, Sheets, Docs, Chat & more | `gws`, `Google Workspace`, `Google Drive`, `Gmail`, `Google Calendar`, `Google Sheets`, `MCP` |
 | **[copilot-sdk](skills/copilot-sdk/SKILL.md)** | GitHub Copilot SDK for building agentic applications | `Copilot SDK`, `GitHub SDK`, `agentic app`, `embed Copilot` |
 | **[honest-agent](skills/honest-agent/SKILL.md)** 🆕 | Configure all AI agents for honest, objective feedback | `honest agent`, `no sycophancy`, `objective`, `contradict me` |
-| **[aws-agentcore](skills/aws-agentcore/SKILL.md)** | AWS Bedrock AgentCore development patterns | `AgentCore`, `Bedrock Agent`, `AWS agent` |
-| **[aws-strands](skills/aws-strands/SKILL.md)** | Model-agnostic agent framework with Strands SDK | `Strands`, `ReAct agent`, `model-agnostic` |
+| **[aws-strands](skills/aws-strands/SKILL.md)** | The agent framework (the "brain") - write agent logic, tools & multi-agent systems; deploy via aws-harness | `Strands`, `agent framework`, `agents as tools`, `Swarm`, `Graph`, `BedrockModel` |
 | **[aws-account-management](skills/aws-account-management/SKILL.md)** | AWS Organizations, IAM, billing & multi-account | `AWS Organizations`, `IAM`, `SCPs`, `Cost Explorer` |
 | **[langchain](skills/langchain/SKILL.md)** | LangChain/LangGraph pipelines and agent workflows | `LangChain`, `LangGraph`, `RAG`, `LCEL` |
 | **[vercel](skills/vercel/SKILL.md)** | Vercel deployment, serverless, and edge functions | `Vercel`, `serverless`, `edge function` |
@@ -705,7 +704,7 @@ Before you start, you need:
 
 2. **Copy skills there**:
    ```bash
-   cp -r skills/aws-agentcore ~/.claude/skills/
+   cp -r skills/aws-harness ~/.claude/skills/
    ```
 
 **Verify it's working:**
@@ -880,8 +879,6 @@ ai-agents-skills/
 │   ├── 📁 honest-agent/
 │   │   └── 📄 SKILL.md
 │   ├── 📁 aws-harness/      # 🆕 NEW!
-│   │   └── 📄 SKILL.md
-│   ├── 📁 aws-agentcore/
 │   │   └── 📄 SKILL.md
 │   ├── 📁 aws-strands/
 │   │   └── 📄 SKILL.md
