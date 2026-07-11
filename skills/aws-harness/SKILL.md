@@ -7,7 +7,7 @@ description: Build a new AI agent on AWS and deploy it easily, OR wrap and deplo
 
 Take an AI agent from an empty folder - or from code you already have - to a live, serverless endpoint on AWS. Every command and import below is verified against official docs (sources at the bottom).
 
-> Companion skills: [aws-strands](../aws-strands/SKILL.md) is the agent framework (the brain); [aws-agentcore](../aws-agentcore/SKILL.md) covers SDK primitives. **This** skill is the harness: how to run and deploy an agent on AWS.
+> Companion skill: [aws-strands](../aws-strands/SKILL.md) is the agent framework (the "brain" - how to write the agent). **This** skill is the harness: how to run and deploy that agent on AWS. Write with Strands, ship with AgentCore.
 
 ## What "harness" means (read this first)
 
@@ -16,7 +16,19 @@ A language model, alone, only turns text into text. It cannot call an API, remem
 - **Agent loop** - call the model, read the tool it wants, run that tool, feed the result back, repeat until done. The model *decides*; the harness *executes and loops*.
 - **Tool execution, memory, identity, guardrails, sandboxing, observability** - everything that makes it useful and production-safe.
 
-**Amazon Bedrock AgentCore** is AWS's managed set of these harness pieces (Runtime, Memory, Identity, Gateway, Observability). You bring the agent; AgentCore hosts, secures, and scales it.
+**Amazon Bedrock AgentCore** is AWS's managed set of these harness pieces. You bring the agent (built with [Strands](../aws-strands/SKILL.md), LangGraph, or anything); AgentCore hosts, secures, and scales it. The components, composable and framework-agnostic:
+
+| Component | What it gives you |
+|---|---|
+| **Runtime** | Serverless, isolated agent execution (any framework, any model) |
+| **Memory** | Short-term (session) + long-term (cross-session) memory |
+| **Identity** | Let the agent act on behalf of a user (Cognito, Okta, Google, EntraID, OAuth) |
+| **Gateway** | Turn APIs / Lambda functions into agent tools (MCP) |
+| **Code Interpreter** | Sandboxed code execution |
+| **Browser** | Managed headless browser for web tasks |
+| **Observability** | Tracing, logs, metrics (CloudWatch / OpenTelemetry) |
+
+You adopt these one at a time via `agentcore add` (Path A) or the SDK/API (Path B) - not all-or-nothing.
 
 ## Which path are you on?
 
