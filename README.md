@@ -560,6 +560,7 @@ Agent Skills work with these AI coding agents:
 | **[google-workspace-cli](skills/google-workspace-cli/SKILL.md)** 🆕 | Google Workspace CLI (`gws`) — Drive, Gmail, Calendar, Sheets, Docs, Chat & more | `gws`, `Google Workspace`, `Google Drive`, `Gmail`, `Google Calendar`, `Google Sheets`, `MCP` |
 | **[copilot-sdk](skills/copilot-sdk/SKILL.md)** | GitHub Copilot SDK for building agentic applications | `Copilot SDK`, `GitHub SDK`, `agentic app`, `embed Copilot` |
 | **[honest-agent](skills/honest-agent/SKILL.md)** 🆕 | Configure all AI agents for honest, objective feedback | `honest agent`, `no sycophancy`, `objective`, `contradict me` |
+| **[aws-harness](skills/aws-harness/SKILL.md)** 🆕 | Build a new agent AND deploy it easily on AWS, or wrap + ship an agent you already have, via the Bedrock AgentCore harness - CLI (create/dev/deploy/invoke) plus SDK-wrap and FastAPI/Docker/ECR paths, every import verified | `agent harness`, `AWS harness`, `AgentCore`, `agentcore create`, `agentcore deploy`, `deploy agent on AWS`, `bring your own agent` |
 | **[aws-agentcore](skills/aws-agentcore/SKILL.md)** | AWS Bedrock AgentCore development patterns | `AgentCore`, `Bedrock Agent`, `AWS agent` |
 | **[aws-strands](skills/aws-strands/SKILL.md)** | Model-agnostic agent framework with Strands SDK | `Strands`, `ReAct agent`, `model-agnostic` |
 | **[aws-account-management](skills/aws-account-management/SKILL.md)** | AWS Organizations, IAM, billing & multi-account | `AWS Organizations`, `IAM`, `SCPs`, `Cost Explorer` |
@@ -877,6 +878,8 @@ ai-agents-skills/
 │   ├── 📁 copilot-sdk/
 │   │   └── 📄 SKILL.md
 │   ├── 📁 honest-agent/
+│   │   └── 📄 SKILL.md
+│   ├── 📁 aws-harness/      # 🆕 NEW!
 │   │   └── 📄 SKILL.md
 │   ├── 📁 aws-agentcore/
 │   │   └── 📄 SKILL.md
