@@ -123,6 +123,45 @@ response = client.models.generate_content(
 )
 ```
 
+## Alternative Access: Atlas Cloud
+
+The same model is served by [Atlas Cloud](https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=ai-agents-skills) as `google/nano-banana-pro/text-to-image`, which is useful when a Google AI Studio key is not available. It is a different API shape — a POST queues a job and the result is polled — not a drop-in for the calls above.
+
+```bash
+# 1. Submit
+curl -s -X POST https://api.atlascloud.ai/api/v1/model/generateImage \
+  -H "Authorization: Bearer $ATLASCLOUD_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "User-Agent: my-app/1" \
+  -d '{
+    "model": "google/nano-banana-pro/text-to-image",
+    "prompt": "Professional product photo of a coffee mug",
+    "aspect_ratio": "16:9"
+  }'
+# -> {"code":200,"data":{"id":"<prediction-id>","status":"processing"}}
+
+# 2. Poll every 5-6s until completed, then download data.outputs[0]
+curl -s https://api.atlascloud.ai/api/v1/model/prediction/<prediction-id> \
+  -H "Authorization: Bearer $ATLASCLOUD_API_KEY" \
+  -H "User-Agent: my-app/1"
+```
+
+What carries over from the section above and what does not (measured against this endpoint, not copied from a vendor page):
+
+| Control documented above | On this path |
+|---|---|
+| `aspect_ratio` | Works. `1:1` → 1024×1024, `16:9` → 1376×768, `9:16` → 768×1376 |
+| `image_size` (`1K`/`2K`/`4K`) | Not exposed — the model's default resolution comes back |
+| Output container | JPEG, not PNG |
+| Multi-turn editing, Google Search grounding | Not available — those are Gemini API features |
+
+Two more things worth knowing:
+
+- A `size` field is **ignored** by this model (a `1024*1024` request still returned 1408×768); use `aspect_ratio` instead. Other Atlas image models behave the opposite way, so check per model.
+- `api.atlascloud.ai` rejects the default `User-Agent` of some HTTP clients with `403 error code 1010` — send an explicit one, as above. The result URL is short-lived, so download it right away.
+
+Stay on the Gemini API when you need 2K/4K output, PNG, grounding, or the iterative editing flow below.
+
 ## Multi-Turn Conversations (Iterative Editing)
 
 ```python
