@@ -9,7 +9,7 @@ make_dark_bg(W, H, speaker_box=None) -> RGBA Image
 draw_text_safe(img, xy, text, font, ...)
 """
 from __future__ import annotations
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
 
 
 def blank(w, h):
@@ -45,9 +45,13 @@ def apple_glass_card(W, H, x, y, w, h, radius=52, content_fn=None,
         a = int(highlight_alpha * (1 - t) ** 1.6)
         if a <= 0:
             continue
-        inset = max(2, radius - i)
-        hd.line([(x + inset, y + i + 1), (x + w - inset, y + i + 1)],
+        hd.line([(x + 2, y + i + 1), (x + w - 2, y + i + 1)],
                 fill=(255, 255, 255, a))
+    # clip the highlight to the card's rounded shape (a linear inset left chamfered corners)
+    clip = Image.new("L", (W, H), 0)
+    ImageDraw.Draw(clip).rounded_rectangle([x + 1, y + 1, x + w - 1, y + h - 1],
+                                           radius=max(0, radius - 1), fill=255)
+    hl.putalpha(ImageChops.multiply(hl.getchannel("A"), clip))
     img = Image.alpha_composite(img, hl)
 
     # 4. Inner border
@@ -82,16 +86,17 @@ def make_dark_bg(W, H, speaker_box=None):
     """Solid dark gradient background + soft drop shadow at speaker_box.
     speaker_box = (x, y, w, h, radius) or None.
     """
-    bg = Image.new("RGB", (W, H), (12, 14, 22))
+    bg = Image.new("RGB", (W, H), (14, 13, 42))
     # Smooth top-left to bottom-right gradient
-    grad = Image.new("RGB", (W, H), (12, 14, 22))
+    grad = Image.new("RGB", (W, H), (14, 13, 42))
     pixels = grad.load()
     for y in range(H):
         for x in range(W):
             t = (x / W + y / H) / 2
-            r = int(20 + 8 * (1 - t))
-            g = int(22 + 10 * (1 - t))
-            b = int(34 + 14 * (1 - t))
+            # Phoenix Ink night sky: #15133C (top-left) -> #0A0922 (bottom-right)
+            r = int(10 + 11 * (1 - t))
+            g = int(9 + 10 * (1 - t))
+            b = int(34 + 26 * (1 - t))
             pixels[x, y] = (r, g, b)
     bg = grad.convert("RGBA")
 
@@ -102,7 +107,7 @@ def make_dark_bg(W, H, speaker_box=None):
     vig_mask = vig_mask.filter(ImageFilter.GaussianBlur(radius=120))
     # Invert so edges are dark, center is transparent
     inverted = vig_mask.point(lambda v: max(0, 90 - int(v * 0.35)))
-    edge = Image.new("RGBA", (W, H), (0, 0, 0, 255))
+    edge = Image.new("RGBA", (W, H), (5, 4, 20, 255))
     edge.putalpha(inverted)
     bg = Image.alpha_composite(bg, edge)
 
@@ -134,21 +139,24 @@ RAD_BANNER = 36
 RAD_CARD   = 52
 RAD_PIP    = 56  # bigger for speaker frame
 
-# Brand color reference
+# Brand color reference. YUV.AI colours come from yuv-design-system (Phoenix Ink):
+# pink #FF2EA0, gold #FFD66E ("yellow" is kept as an alias), violet #8B6CFF, night #0E0D2A.
+# Third-party brand colours (facebook, whatsapp, claude...) stay as their owners define them.
 COLORS = {
+    "gold":      (255, 214, 110),
     "facebook":  (24, 119, 242),
     "instagram": (228, 64, 95),
     "whatsapp":  (37, 211, 102),
     "claude":    (215, 121, 70),
     "anthropic": (215, 121, 70),
-    "yellow":    (255, 230, 30),
-    "pink":      (255, 60, 140),
+    "yellow":    (255, 214, 110),
+    "pink":      (255, 46, 160),
     "green":     (37, 211, 102),
     "red":       (255, 80, 80),
     "blue":      (90, 170, 255),
-    "purple":    (180, 100, 240),
-    "bg_dark":   (12, 14, 20),
-    "bone":      (245, 240, 225),
+    "purple":    (139, 108, 255),
+    "bg_dark":   (14, 13, 42),
+    "bone":      (255, 255, 255),
 }
 
 

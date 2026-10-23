@@ -1,6 +1,6 @@
 """V2 karaoke — bigger video-title style, positioned in the LEFT HALF
 (below the cards, above the bottom key-moment strip). Per-word pop with
-strong scale entrance + slight Y-translation. Hebrew = Rubik Black.
+strong scale entrance + slight Y-translation. Hebrew = Karantina Bold (yuv-design-system §2).
 English brand tokens = Anton.
 """
 from __future__ import annotations
@@ -27,7 +27,7 @@ YCbCr Matrix: TV.709
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: HE,Rubik Black,108,&H00FFFFFF,&H00FFFFFF,&H00111111,&H00000000,1,0,0,0,100,100,0,0,1,9,4,2,0,0,40,1
+Style: HE,Karantina,135,&H00FFFFFF,&H00FFFFFF,&H00111111,&H00000000,1,0,0,0,100,100,0,0,1,9,4,2,0,0,40,1
 Style: EN,Anton,124,&H0000E5FF,&H0000E5FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,11,4,2,0,0,40,1
 
 [Events]
@@ -43,7 +43,7 @@ YCbCr Matrix: TV.709
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: HE,Rubik Black,90,&H00FFFFFF,&H00FFFFFF,&H00111111,&H00000000,1,0,0,0,100,100,0,0,1,7,3,2,0,440,80,1
+Style: HE,Karantina,112,&H00FFFFFF,&H00FFFFFF,&H00111111,&H00000000,1,0,0,0,100,100,0,0,1,7,3,2,0,440,80,1
 Style: EN,Anton,104,&H0000E5FF,&H0000E5FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,9,3,2,0,440,80,1
 
 [Events]

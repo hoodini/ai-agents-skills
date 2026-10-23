@@ -22,8 +22,9 @@ def rtl(s):
 EDIT = Path(r"C:\Users\User\Desktop\edit")
 FONTS = EDIT / "fonts"
 ANTON = str(FONTS / "Anton-Regular.ttf")
-RUBIK = str(FONTS / "Rubik-Black.ttf")
-RUBIK_B = str(FONTS / "Rubik-Bold.ttf")
+KARANTINA = str(FONTS / "Karantina-Bold.ttf")      # Hebrew display (yuv-design-system §2)
+ASSISTANT_XB = str(FONTS / "Assistant-ExtraBold.ttf")  # Hebrew card text
+ASSISTANT_B = str(FONTS / "Assistant-Bold.ttf")    # Hebrew labels
 
 
 def ease_out_cubic(t):
@@ -52,11 +53,11 @@ def render_bars_frame(W, H, area, fi, total_frames, title_text, vertical_layout=
     x, y, w, h = area
     img = Image.alpha_composite(img, apple_glass_card(W, H, x, y, w, h, RAD_CARD,
                                                       tint=(255, 255, 255, 30)))
-    f_title = ImageFont.truetype(RUBIK, max(40, h // 16))
-    f_label = ImageFont.truetype(RUBIK_B, max(30, h // 22))
+    f_title = ImageFont.truetype(KARANTINA, int((max(40, h // 16) * 1.25)))
+    f_label = ImageFont.truetype(ASSISTANT_B, max(30, h // 22))
     title_h = h // 9
     t_text(img, (x + w // 2, y + title_h // 2 + 30), title_text, f_title,
-           fill=(255, 230, 30, 255), stroke=(0, 0, 0, 200), stroke_w=2)
+           fill=(255, 214, 110, 255), stroke=(0, 0, 0, 200), stroke_w=2)
 
     if vertical_layout:
         # 4 horizontal bars (good for narrow vertical card)
@@ -163,9 +164,9 @@ def render_flow_v_frame(W, H, x, y, w, h, fi, total_frames):
     img = blank(W, H)
     img = Image.alpha_composite(img, apple_glass_card(W, H, x, y, w, h, RAD_CARD,
                                                       tint=(255, 255, 255, 30)))
-    f_title = ImageFont.truetype(RUBIK, max(36, h // 22))
+    f_title = ImageFont.truetype(KARANTINA, int((max(36, h // 22) * 1.25)))
     t_text(img, (x + w // 2, y + 50), rtl("איך זה עובד"), f_title,
-           fill=(255, 230, 30, 255), stroke=(0, 0, 0, 200), stroke_w=2)
+           fill=(255, 214, 110, 255), stroke=(0, 0, 0, 200), stroke_w=2)
 
     n = len(FLOW_NODES)
     node_size = 96
@@ -175,7 +176,7 @@ def render_flow_v_frame(W, H, x, y, w, h, fi, total_frames):
     cx = x + 90  # left side, leaves room for text right of node
     f_letter = ImageFont.truetype(ANTON, 50)
     f_en = ImageFont.truetype(ANTON, 44)
-    f_he = ImageFont.truetype(RUBIK, 28)
+    f_he = ImageFont.truetype(ASSISTANT_XB, 28)
 
     for i, (en, he_raw, color, letter) in enumerate(FLOW_NODES):
         ny = node_y_top + i * (node_size + gap)
@@ -221,14 +222,14 @@ def render_flow_v_frame(W, H, x, y, w, h, fi, total_frames):
                     seg_bot = min(head_y, dash_y + 14)
                     if seg_bot > seg_top:
                         d.line([(cx, seg_top), (cx, seg_bot)],
-                               fill=(255, 230, 30, 240), width=6)
+                               fill=(255, 214, 110, 240), width=6)
                     dash_y += 22
                 if ap > 0.85:
                     d.polygon(
                         [(cx, head_y + 14),
                          (cx - 14, head_y - 8),
                          (cx + 14, head_y - 8)],
-                        fill=(255, 230, 30, 240),
+                        fill=(255, 214, 110, 240),
                     )
     return img
 
@@ -237,9 +238,9 @@ def render_flow_h_frame(W, H, x, y, w, h, fi, total_frames):
     img = blank(W, H)
     img = Image.alpha_composite(img, apple_glass_card(W, H, x, y, w, h, RAD_CARD,
                                                       tint=(255, 255, 255, 30)))
-    f_title = ImageFont.truetype(RUBIK, 44)
+    f_title = ImageFont.truetype(KARANTINA, int((44) * 1.25))
     t_text(img, (x + w // 2, y + 50), rtl("איך זה עובד"), f_title,
-           fill=(255, 230, 30, 255), stroke=(0, 0, 0, 200), stroke_w=2)
+           fill=(255, 214, 110, 255), stroke=(0, 0, 0, 200), stroke_w=2)
     n = len(FLOW_NODES)
     node_size = 110
     avail_w = w - 160
@@ -248,7 +249,7 @@ def render_flow_h_frame(W, H, x, y, w, h, fi, total_frames):
     cy = y + 230
     f_letter = ImageFont.truetype(ANTON, 56)
     f_en = ImageFont.truetype(ANTON, 40)
-    f_he = ImageFont.truetype(RUBIK, 30)
+    f_he = ImageFont.truetype(ASSISTANT_XB, 30)
     for i, (en, he_raw, color, letter) in enumerate(FLOW_NODES):
         nx = node_x_left + i * (node_size + gap)
         offset = i * 5
@@ -293,14 +294,14 @@ def render_flow_h_frame(W, H, x, y, w, h, fi, total_frames):
                     seg_r = min(head_x, dash_x + 14)
                     if seg_r > seg_l:
                         d.line([(seg_l, cy), (seg_r, cy)],
-                               fill=(255, 230, 30, 240), width=6)
+                               fill=(255, 214, 110, 240), width=6)
                     dash_x += 22
                 if ap > 0.85:
                     d.polygon(
                         [(head_x + 14, cy),
                          (head_x - 8, cy - 12),
                          (head_x - 8, cy + 12)],
-                        fill=(255, 230, 30, 240),
+                        fill=(255, 214, 110, 240),
                     )
     return img
 

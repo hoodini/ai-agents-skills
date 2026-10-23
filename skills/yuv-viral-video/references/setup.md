@@ -9,42 +9,41 @@ This skill builds on top of the **video-use** skill (cuts, transcription, motion
 | `ffmpeg` ≥ 4.x | Everything | `brew install ffmpeg` (macOS) / Windows: `winget install ffmpeg` / Linux: `apt install ffmpeg` |
 | Python ≥ 3.10 with PIL/numpy/requests | Card rendering, ASS generation | `uv pip install pillow numpy requests` |
 | `python-bidi` | Hebrew RTL reordering for PIL | `uv pip install python-bidi` |
-| `fontTools` + `brotli` | Convert Rubik woff2 → ttf (needed once) | `uv pip install fonttools brotli` |
+| `fontTools` | Make static Assistant weights from the variable font (only when refreshing fonts) | `uv pip install fonttools` |
 | ElevenLabs API key | Scribe transcription + sound generation | https://elevenlabs.io/app/settings/api-keys → write to `~/Developer/video-use/.env` |
-| Anton + Rubik TTF | Fonts (English Anton, Hebrew Rubik) | Bundled in `assets/fonts/` |
+| Anton, Karantina, Assistant TTF | Fonts (English Anton; Hebrew Karantina display + Assistant body) | Bundled in `assets/fonts/` — copy them into `<edit>/fonts/` |
 
 ## Bundled fonts
 
-The skill ships these because download URLs change and CDN paths break:
+The skill ships these because download URLs change and CDN paths break. Fonts follow `yuv-design-system` §2 (Phoenix Ink):
 
 ```
-assets/fonts/Anton-Regular.ttf   161 KB — Google Fonts Anton (display, English)
-assets/fonts/Rubik-Black.ttf      13 KB — Rubik 900 weight (Hebrew + Latin merged)
-assets/fonts/Rubik-Bold.ttf       13 KB — Rubik 700 weight (Hebrew + Latin merged)
+assets/fonts/Anton-Regular.ttf        — Anton (display, English)
+assets/fonts/Karantina-Bold.ttf       — Karantina 700 (Hebrew display, karaoke, numbers; Latin included)
+assets/fonts/Assistant-ExtraBold.ttf  — Assistant 800 (Hebrew card text)
+assets/fonts/Assistant-Bold.ttf       — Assistant 700 (Hebrew labels)
+assets/fonts/OFL-*.txt                — licences
 ```
 
-If these get corrupted or you need to refresh them, re-fetch:
+The scripts read fonts from `<edit>/fonts/`, so copy them there once per machine:
 
 ```bash
-# Anton (full TTF directly from gstatic — old-UA trick)
-curl -sL -H "User-Agent: Mozilla/5.0" \
-  "https://fonts.gstatic.com/s/anton/v25/1Ptgg87LROyAm0K08i4gS7lu.ttf" \
-  -o assets/fonts/Anton-Regular.ttf
+mkdir -p <edit>/fonts && cp <skill>/assets/fonts/*.ttf <edit>/fonts/
+```
 
-# Rubik — only woff2 is served. Merge Latin + Hebrew subsets:
-mkdir -p /tmp/rubik && cd /tmp/rubik
-curl -sL "https://cdn.jsdelivr.net/npm/@fontsource/rubik/files/rubik-hebrew-900-normal.woff2" -o he.woff2
-curl -sL "https://cdn.jsdelivr.net/npm/@fontsource/rubik/files/rubik-latin-900-normal.woff2" -o lat.woff2
+For the ASS / libass karaoke path, point ffmpeg at the same folder: `subtitles=karaoke.ass:fontsdir=<edit>/fonts`.
+
+If they get corrupted, re-fetch from the Google Fonts repo:
+
+```bash
+curl -sL https://raw.githubusercontent.com/google/fonts/main/ofl/karantina/Karantina-Bold.ttf -o assets/fonts/Karantina-Bold.ttf
+curl -sL "https://raw.githubusercontent.com/google/fonts/main/ofl/assistant/Assistant%5Bwght%5D.ttf" -o /tmp/Assistant.ttf
 python -c "
 from fontTools.ttLib import TTFont
-from fontTools.merge import Merger
-m = Merger()
-font = m.merge(['lat.woff2', 'he.woff2'])
-font.flavor = None
-font.save('Rubik-Black.ttf')
+from fontTools.varLib import instancer
+for w, n in [(700, 'Bold'), (800, 'ExtraBold')]:
+    instancer.instantiateVariableFont(TTFont('/tmp/Assistant.ttf'), {'wght': w}, updateFontNames=True).save(f'assets/fonts/Assistant-{n}.ttf')
 "
-cp Rubik-Black.ttf <skill>/assets/fonts/
-# Repeat for 700/Bold
 ```
 
 ## ElevenLabs API key
@@ -115,7 +114,6 @@ numpy>=1.24
 requests>=2.30
 python-bidi>=0.6
 fonttools>=4.50
-brotli>=1.1
 librosa>=0.10        # only used by video-use, kept for completeness
 matplotlib>=3.7      # ditto
 ```

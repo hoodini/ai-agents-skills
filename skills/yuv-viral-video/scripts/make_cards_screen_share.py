@@ -30,8 +30,9 @@ def rtl(s):
 EDIT = Path(r"C:\Users\User\Desktop\edit")
 FONTS = EDIT / "fonts"
 ANTON = str(FONTS / "Anton-Regular.ttf")
-RUBIK = str(FONTS / "Rubik-Black.ttf")
-RUBIK_B = str(FONTS / "Rubik-Bold.ttf")
+KARANTINA = str(FONTS / "Karantina-Bold.ttf")      # Hebrew display (yuv-design-system §2)
+ASSISTANT_XB = str(FONTS / "Assistant-ExtraBold.ttf")  # Hebrew card text
+ASSISTANT_B = str(FONTS / "Assistant-Bold.ttf")    # Hebrew labels
 
 
 def fill(d, x, y, w, h, color):
@@ -63,17 +64,17 @@ def _key_moment_card_9x16(W, H, label_he, label_en):
     def content(W, H, x, y, w, h):
         c = blank(W, H)
         f_en = ImageFont.truetype(ANTON, 60)
-        f_he = ImageFont.truetype(RUBIK, 50)
+        f_he = ImageFont.truetype(ASSISTANT_XB, 50)
         # English on right, Hebrew on left (visual balance)
         if label_en:
             t_text(c, (x + 200, y + h // 2), label_en, f_en,
-                   fill=(255, 230, 30, 255), stroke=(0, 0, 0, 220), stroke_w=3, anchor="lm")
+                   fill=(255, 214, 110, 255), stroke=(0, 0, 0, 220), stroke_w=3, anchor="lm")
         if label_he:
             t_text(c, (x + w - 60, y + h // 2), rtl(label_he), f_he,
                    fill=(255, 255, 255, 255), stroke=(0, 0, 0, 200), stroke_w=2, anchor="rm")
         # left accent stripe
         d = ImageDraw.Draw(c)
-        round_fill(d, x + 30, y + 30, 14, h - 60, (255, 230, 30, 255), radius=7)
+        round_fill(d, x + 30, y + 30, 14, h - 60, (255, 214, 110, 255), radius=7)
         return c
     img = apple_glass_card(W, H, k["x"], k["y"], k["w"], k["h"], k["radius"],
                            tint=(0, 0, 0, 130), content_fn=content)
@@ -86,15 +87,15 @@ def _key_moment_card_16x9(W, H, label_he, label_en):
     def content(W, H, x, y, w, h):
         c = blank(W, H)
         f_en = ImageFont.truetype(ANTON, 56)
-        f_he = ImageFont.truetype(RUBIK, 46)
+        f_he = ImageFont.truetype(ASSISTANT_XB, 46)
         if label_en:
             t_text(c, (x + 200, y + h // 2), label_en, f_en,
-                   fill=(255, 230, 30, 255), stroke=(0, 0, 0, 220), stroke_w=3, anchor="lm")
+                   fill=(255, 214, 110, 255), stroke=(0, 0, 0, 220), stroke_w=3, anchor="lm")
         if label_he:
             t_text(c, (x + w - 60, y + h // 2), rtl(label_he), f_he,
                    fill=(255, 255, 255, 255), stroke=(0, 0, 0, 200), stroke_w=2, anchor="rm")
         d = ImageDraw.Draw(c)
-        round_fill(d, x + 30, y + 25, 14, h - 50, (255, 230, 30, 255), radius=7)
+        round_fill(d, x + 30, y + 25, 14, h - 50, (255, 214, 110, 255), radius=7)
         return c
     img = apple_glass_card(W, H, k["x"], k["y"], k["w"], k["h"], k["radius"],
                            tint=(0, 0, 0, 130), content_fn=content)
@@ -112,12 +113,12 @@ def cards_9x16(out_dir):
     # ---------- REVEAL: META ADS reveal — content actually said ----------
     def reveal_content(W, H, x, y, w, h):
         c = blank(W, H)
-        f_lab = ImageFont.truetype(RUBIK_B, 30)
+        f_lab = ImageFont.truetype(ASSISTANT_B, 30)
         f_title = ImageFont.truetype(ANTON, 96)
-        f_he = ImageFont.truetype(RUBIK, 44)
+        f_he = ImageFont.truetype(ASSISTANT_XB, 44)
         # tagline
         t_text(c, (x + w // 2, y + 80), rtl("סקיל חדש"), f_lab,
-               fill=(255, 230, 30, 255))
+               fill=(255, 214, 110, 255))
         # main brand
         t_text(c, (x + w // 2, y + 220), "META", f_title,
                fill=(255, 255, 255, 255), stroke=(0, 0, 0, 220), stroke_w=4)
@@ -125,7 +126,7 @@ def cards_9x16(out_dir):
                fill=(255, 255, 255, 255), stroke=(0, 0, 0, 220), stroke_w=4)
         # accent
         d = ImageDraw.Draw(c)
-        round_fill(d, x + w // 2 - 80, y + 410, 160, 8, (255, 230, 30, 255), radius=4)
+        round_fill(d, x + w // 2 - 80, y + 410, 160, 8, (255, 214, 110, 255), radius=4)
         # quote
         t_text(c, (x + w // 2, y + 490), rtl("בניתי עם קלוד"), f_he,
                fill=(220, 220, 230, 255))
@@ -140,12 +141,12 @@ def cards_9x16(out_dir):
     # ---------- PLATFORMS: 3 brand chips stacked vertically ----------
     def platforms_content(W, H, x, y, w, h):
         c = blank(W, H)
-        f_lab = ImageFont.truetype(RUBIK_B, 30)
+        f_lab = ImageFont.truetype(ASSISTANT_B, 30)
         f_en = ImageFont.truetype(ANTON, 50)
-        f_he = ImageFont.truetype(RUBIK, 36)
+        f_he = ImageFont.truetype(ASSISTANT_XB, 36)
         f_letter = ImageFont.truetype(ANTON, 50)
         t_text(c, (x + w // 2, y + 80), rtl("לנהל את הכל"), f_lab,
-               fill=(255, 230, 30, 255))
+               fill=(255, 214, 110, 255))
         chips = [
             ("FACEBOOK",  rtl("פייסבוק"),   COLORS["facebook"],  "f"),
             ("INSTAGRAM", rtl("אינסטגרם"),  COLORS["instagram"], "IG"),
@@ -179,17 +180,17 @@ def cards_9x16(out_dir):
     # ---------- AUTO: actually-said quote ----------
     def auto_content(W, H, x, y, w, h):
         c = blank(W, H)
-        f_lab = ImageFont.truetype(RUBIK_B, 30)
+        f_lab = ImageFont.truetype(ASSISTANT_B, 30)
         f_en = ImageFont.truetype(ANTON, 90)
-        f_he = ImageFont.truetype(RUBIK, 40)
+        f_he = ImageFont.truetype(ASSISTANT_XB, 40)
         t_text(c, (x + w // 2, y + 80), rtl("משימות מתוזמנות"), f_lab,
-               fill=(255, 230, 30, 255))
+               fill=(255, 214, 110, 255))
         t_text(c, (x + w // 2, y + 220), "AUTO", f_en,
-               fill=(255, 230, 30, 255), stroke=(0, 0, 0, 220), stroke_w=4)
+               fill=(255, 214, 110, 255), stroke=(0, 0, 0, 220), stroke_w=4)
         t_text(c, (x + w // 2, y + 320), "IMPROVE", f_en,
-               fill=(255, 230, 30, 255), stroke=(0, 0, 0, 220), stroke_w=4)
+               fill=(255, 214, 110, 255), stroke=(0, 0, 0, 220), stroke_w=4)
         d = ImageDraw.Draw(c)
-        round_fill(d, x + w // 2 - 100, y + 410, 200, 8, (255, 230, 30, 255), radius=4)
+        round_fill(d, x + w // 2 - 100, y + 410, 200, 8, (255, 214, 110, 255), radius=4)
         t_text(c, (x + w // 2, y + 490), rtl("תוך כדי ריצה"), f_he,
                fill=(255, 255, 255, 255))
         return c
@@ -207,16 +208,16 @@ def cards_9x16(out_dir):
     dh.ellipse([LX - 20, 800, LX + LW + 20, 1200], fill=(255, 90, 0, 200))
     halo = halo.filter(ImageFilter.GaussianBlur(radius=80))
     img = Image.alpha_composite(img, halo)
-    f_huge = ImageFont.truetype(RUBIK, 220)
+    f_huge = ImageFont.truetype(KARANTINA, int((220) * 1.25))
     t_text(img, (LX + LW // 2, 1000), rtl("מטורף"), f_huge,
-           fill=(255, 230, 30, 255), stroke=(0, 0, 0, 255), stroke_w=10)
+           fill=(255, 214, 110, 255), stroke=(0, 0, 0, 255), stroke_w=10)
     img.save(out_dir / "wow.png")
 
     # ---------- CTA: actual quote ----------
     def cta_content(W, H, x, y, w, h):
         c = blank(W, H)
-        f_lab = ImageFont.truetype(RUBIK_B, 30)
-        f_he_big = ImageFont.truetype(RUBIK, 80)
+        f_lab = ImageFont.truetype(ASSISTANT_B, 30)
+        f_he_big = ImageFont.truetype(KARANTINA, int((80) * 1.25))
         f_en = ImageFont.truetype(ANTON, 84)
         d = ImageDraw.Draw(c)
         # pink pill header
@@ -225,9 +226,9 @@ def cards_9x16(out_dir):
                fill=(255, 255, 255, 255), stroke=(0, 0, 0, 220), stroke_w=4)
         # body
         t_text(c, (x + w // 2, y + 280), "META ADS", f_en,
-               fill=(255, 230, 30, 255), stroke=(0, 0, 0, 220), stroke_w=4)
-        round_fill(d, x + w // 2 - 80, y + 350, 160, 6, (255, 230, 30, 255), radius=3)
-        f_sub = ImageFont.truetype(RUBIK, 36)
+               fill=(255, 214, 110, 255), stroke=(0, 0, 0, 220), stroke_w=4)
+        round_fill(d, x + w // 2 - 80, y + 350, 160, 6, (255, 214, 110, 255), radius=3)
+        f_sub = ImageFont.truetype(ASSISTANT_XB, 36)
         t_text(c, (x + w // 2, y + 430), rtl("מה שעושים במשרדי פרסום"), f_sub,
                fill=(220, 220, 230, 255))
         return c
@@ -262,14 +263,14 @@ def cards_16x9(out_dir):
     # ---------- REVEAL ----------
     def reveal_content(W, H, x, y, w, h):
         c = blank(W, H)
-        f_lab = ImageFont.truetype(RUBIK_B, 30)
+        f_lab = ImageFont.truetype(ASSISTANT_B, 30)
         f_title = ImageFont.truetype(ANTON, 130)
-        f_he = ImageFont.truetype(RUBIK, 50)
-        t_text(c, (x + w // 2, y + 70), rtl("סקיל חדש"), f_lab, fill=(255, 230, 30, 255))
+        f_he = ImageFont.truetype(ASSISTANT_XB, 50)
+        t_text(c, (x + w // 2, y + 70), rtl("סקיל חדש"), f_lab, fill=(255, 214, 110, 255))
         t_text(c, (x + w // 2, y + 230), "META ADS", f_title,
                fill=(255, 255, 255, 255), stroke=(0, 0, 0, 220), stroke_w=5)
         d = ImageDraw.Draw(c)
-        round_fill(d, x + w // 2 - 100, y + 310, 200, 8, (255, 230, 30, 255), radius=4)
+        round_fill(d, x + w // 2 - 100, y + 310, 200, 8, (255, 214, 110, 255), radius=4)
         t_text(c, (x + w // 2, y + 390), rtl("בניתי עם קלוד"), f_he,
                fill=(220, 220, 230, 255))
         return c
@@ -283,11 +284,11 @@ def cards_16x9(out_dir):
     # ---------- PLATFORMS ----------
     def platforms_content(W, H, x, y, w, h):
         c = blank(W, H)
-        f_lab = ImageFont.truetype(RUBIK_B, 32)
+        f_lab = ImageFont.truetype(ASSISTANT_B, 32)
         f_en = ImageFont.truetype(ANTON, 60)
-        f_he = ImageFont.truetype(RUBIK, 40)
+        f_he = ImageFont.truetype(ASSISTANT_XB, 40)
         f_letter = ImageFont.truetype(ANTON, 56)
-        t_text(c, (x + w // 2, y + 60), rtl("לנהל את הכל"), f_lab, fill=(255, 230, 30, 255))
+        t_text(c, (x + w // 2, y + 60), rtl("לנהל את הכל"), f_lab, fill=(255, 214, 110, 255))
         chips = [
             ("FACEBOOK",  rtl("פייסבוק"),   COLORS["facebook"],  "f"),
             ("INSTAGRAM", rtl("אינסטגרם"),  COLORS["instagram"], "IG"),
@@ -321,14 +322,14 @@ def cards_16x9(out_dir):
     # ---------- AUTO ----------
     def auto_content(W, H, x, y, w, h):
         c = blank(W, H)
-        f_lab = ImageFont.truetype(RUBIK_B, 30)
+        f_lab = ImageFont.truetype(ASSISTANT_B, 30)
         f_en = ImageFont.truetype(ANTON, 130)
-        f_he = ImageFont.truetype(RUBIK, 50)
-        t_text(c, (x + w // 2, y + 60), rtl("משימות מתוזמנות"), f_lab, fill=(255, 230, 30, 255))
+        f_he = ImageFont.truetype(ASSISTANT_XB, 50)
+        t_text(c, (x + w // 2, y + 60), rtl("משימות מתוזמנות"), f_lab, fill=(255, 214, 110, 255))
         t_text(c, (x + w // 2, y + 230), "AUTO-IMPROVE", f_en,
-               fill=(255, 230, 30, 255), stroke=(0, 0, 0, 220), stroke_w=5)
+               fill=(255, 214, 110, 255), stroke=(0, 0, 0, 220), stroke_w=5)
         d = ImageDraw.Draw(c)
-        round_fill(d, x + w // 2 - 120, y + 320, 240, 8, (255, 230, 30, 255), radius=4)
+        round_fill(d, x + w // 2 - 120, y + 320, 240, 8, (255, 214, 110, 255), radius=4)
         t_text(c, (x + w // 2, y + 400), rtl("תוך כדי ריצה"), f_he, fill=(255, 255, 255, 255))
         return c
 
@@ -346,24 +347,24 @@ def cards_16x9(out_dir):
     dh.ellipse([cxw - 700, cyw - 280, cxw + 700, cyw + 280], fill=(255, 90, 0, 200))
     halo = halo.filter(ImageFilter.GaussianBlur(radius=80))
     img = Image.alpha_composite(img, halo)
-    f_huge = ImageFont.truetype(RUBIK, 240)
+    f_huge = ImageFont.truetype(KARANTINA, int((240) * 1.25))
     t_text(img, (cxw, cyw), rtl("מטורף"), f_huge,
-           fill=(255, 230, 30, 255), stroke=(0, 0, 0, 255), stroke_w=10)
+           fill=(255, 214, 110, 255), stroke=(0, 0, 0, 255), stroke_w=10)
     img.save(out_dir / "wow.png")
 
     # ---------- CTA ----------
     def cta_content(W, H, x, y, w, h):
         c = blank(W, H)
         d = ImageDraw.Draw(c)
-        f_he_big = ImageFont.truetype(RUBIK, 100)
+        f_he_big = ImageFont.truetype(KARANTINA, int((100) * 1.25))
         f_en = ImageFont.truetype(ANTON, 100)
-        f_sub = ImageFont.truetype(RUBIK, 40)
+        f_sub = ImageFont.truetype(ASSISTANT_XB, 40)
         round_fill(d, x + 60, y + 60, w - 120, 150, COLORS["pink"] + (255,), radius=75)
         t_text(c, (x + w // 2, y + 140), rtl("טירוף"), f_he_big,
                fill=(255, 255, 255, 255), stroke=(0, 0, 0, 220), stroke_w=4)
         t_text(c, (x + w // 2, y + 290), "META ADS", f_en,
-               fill=(255, 230, 30, 255), stroke=(0, 0, 0, 220), stroke_w=4)
-        round_fill(d, x + w // 2 - 100, y + 370, 200, 6, (255, 230, 30, 255), radius=3)
+               fill=(255, 214, 110, 255), stroke=(0, 0, 0, 220), stroke_w=4)
+        round_fill(d, x + w // 2 - 100, y + 370, 200, 6, (255, 214, 110, 255), radius=3)
         t_text(c, (x + w // 2, y + 450), rtl("מה שעושים במשרדי פרסום"), f_sub,
                fill=(220, 220, 230, 255))
         return c

@@ -10,7 +10,7 @@ The **YUV.AI viral-short editor** — a Claude Code / Codex / agent-discoverable
 
 - **Apple-style liquid-glass cards** with real CSS `backdrop-filter` (no PIL pre-bake).
 - **Word-by-word karaoke captions**: full sentence visible, inactive words at 45% opacity, active word slammed to 1.0 with a yellow accent + scale pop.
-- **Hebrew + English bilingual rendering**: Rubik Black for Hebrew, Anton uppercase for English. Brand-name spelling auto-fixed.
+- **Hebrew + English bilingual rendering**: Karantina + Assistant for Hebrew, Anton uppercase for English. Brand-name spelling auto-fixed.
 - **MrBeast-paced cuts**: word-snapped boundaries, 30 ms audio fades, no static moments.
 - **GSAP motion graphics**: `back.out(1.7)` 3D tilt-pop card entrances, idle floats, scatter exits, marker highlights (sweep / circle / burst / scribble / sketchout).
 - **Audio-reactive captions** when the source is music.
@@ -38,22 +38,22 @@ These are all **agent-discoverable skills** — once placed in `~/.claude/skills
 
 ## Style preferences — automatic
 
-You don't have to repeat your brand on every video request. The skill encodes Yuval Avidani's full design system as defaults:
+You don't have to repeat your brand on every video request. The skill takes Yuval Avidani's design system, **Phoenix Ink** (the `yuv-design-system` skill, the single source of truth), as its defaults:
 
 ### Typography
-- **English display / cards / captions:** Anton, UPPERCASE, weight 400, tracking `-0.02em` to `-0.04em`
-- **Hebrew display:** Rubik Black, weight 900
+- **English display / cards / captions:** Anton, UPPERCASE, weight 400, letter-spacing 0 (never negative)
+- **Hebrew display / captions:** Karantina 700 (condensed: ~1.25× size)
 - **Body / chip / secondary text:** Inter (English) / Assistant (Hebrew)
 - **Code / terminal:** JetBrains Mono
 
 ### Color palette
-- **Pink (brand thread):** `#FF1464` — glass-card borders, key-moment strips, hero accents
-- **Yellow (accent):** `#FFE61E` (video) / `#E5FF00` (web) — emphasis tokens, marker highlights
-- **Off-white:** `#F5F0E1` (video, warmer) / `#FAFAF7` (web)
-- **Stage black:** `#0c0e16` (warm near-black, never `#000`)
+- **Stage:** night `#0E0D2A` → `#14123A` (the night sky with soft pink / violet / orange glows)
+- **Pink (brand thread):** `#FF2EA0` — glass-card borders, key-moment strips, emphasis words, the CTA
+- **Gold (marker / active word):** `#FFD66E` → `#F4B030`
+- **Text:** white, secondary `#CFCDEB`
 
 ### Banned
-- Pure `#FFFFFF` (use off-white)
+- The retired systems: Fly High purple + yellow, neon `#FF1464` + `#00E5FF`, Warm Editorial bone, Rubik for Hebrew
 - Blue / navy / slate accents (warm family only)
 - 8 px / 12 px "corporate-rounded" radii (use 0, 999px, or 40–56px)
 - Default Tailwind palette names
@@ -204,7 +204,7 @@ Nothing is ever overwritten. Old versions are kept indefinitely so you can compa
 
 - **[`SKILL.md`](./SKILL.md)** — the full editorial bible (3000+ lines: archetypes, hard rules, tooling, common failure modes).
 - **[`references/setup.md`](./references/setup.md)** — first-time install playbook.
-- **[`assets/fonts/`](./assets/fonts/)** — bundled Anton + Rubik TTFs (pre-merged Latin + Hebrew).
+- **[`assets/fonts/`](./assets/fonts/)** — bundled Anton, Karantina Bold and Assistant Bold / ExtraBold TTFs (Latin + Hebrew), with their OFL licences.
 - **[`scripts/`](./scripts/)** — PIL/ffmpeg helpers (fallback path; prefer hyperframes for production).
 - **[Effects catalog](https://github.com/hoodini/ai-agents-skills) (visual)** — live HTML catalog of every effect, transition, marker, and SFX with copyable IDs.
 

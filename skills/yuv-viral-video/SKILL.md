@@ -1,6 +1,6 @@
 ---
 name: yuv-viral-video
-description: Edit any selfie or screen-share footage into a viral short-form video in YUV.AI's signature style — Apple-style liquid-glass cards (real CSS backdrop-filter), dark-mode polish, MrBeast-paced cuts, video-title karaoke captions, premium GSAP motion graphics, no fake content, never covering the speaker's face. Hebrew is rendered in Rubik Black, English in Anton uppercase. Always renders BOTH 9:16 and 16:9 and always saves with _V<N> suffix for backups. Trigger when the user drops a path to an .mp4/.mov/.mkv and says "edit this", "make it viral", "turn this into a short", or any Hebrew equivalent (ערוך סרטון, סרטון ויראלי, להפוך לוויראלי, ריל, שורט). The pipeline is the COMBINATION of two skills: video-use (transcription + word-snapped cuts + base extraction) and hyperframes (HTML/CSS/GSAP visual composition + render). Do NOT use for podcast-only audio edits.
+description: Edit any selfie or screen-share footage into a viral short-form video in YUV.AI's signature style — Apple-style liquid-glass cards (real CSS backdrop-filter), dark-mode polish, MrBeast-paced cuts, video-title karaoke captions, premium GSAP motion graphics, no fake content, never covering the speaker's face. Look and fonts come from yuv-design-system (Phoenix Ink): Hebrew in Karantina + Assistant, English in Anton uppercase. Always renders BOTH 9:16 and 16:9 and always saves with _V<N> suffix for backups. Trigger when the user drops a path to an .mp4/.mov/.mkv and says "edit this", "make it viral", "turn this into a short", or any Hebrew equivalent (ערוך סרטון, סרטון ויראלי, להפוך לוויראלי, ריל, שורט). The pipeline is the COMBINATION of two skills: video-use (transcription + word-snapped cuts + base extraction) and hyperframes (HTML/CSS/GSAP visual composition + render). Do NOT use for podcast-only audio edits.
 ---
 
 # Yuv-Viral-Video
@@ -51,47 +51,44 @@ Final renders land at `~/Documents/yuv-projects/videos/<slug>/renders/final_*_V<
 
 ---
 
-## Style preferences (mandatory defaults — inherited from `yuv-design-system`)
+## Style preferences (from `yuv-design-system`, Phoenix Ink v3)
 
-This skill is the **video instantiation** of Yuval Avidani's brand system. Whenever a brand or palette is not explicitly specified by the source content, these defaults apply. They override any companion-skill defaults that conflict.
+This skill is the **video instantiation** of Yuval Avidani's brand system. **`yuv-design-system` is the only source of colours, fonts, logos and motion rules**; the tables below are a summary of it for this pipeline. If they ever differ, yuv-design-system wins. They override any companion-skill defaults that conflict.
 
 ### Typography
 
 | Role | English | Hebrew | Rule |
 |---|---|---|---|
-| Display / cards / karaoke captions | **Anton** (uppercase, weight 400 + tight tracking `-0.02em` to `-0.04em`) | **Rubik Black** (weight 900) | Always uppercase for English, never title case. Always weight-900 for Hebrew display text. |
-| Body / glass-card body copy / chip text | **Inter** (400 / 500 / 600 / 700) | **Assistant** (400 / 500 / 600 / 700) | Use only when the card has secondary body copy beneath the display title. Line-height 1.4 inside cards. |
-| Numbers / counters / stats | **Anton** | **Rubik Black** | Treat numbers as display text, never body. |
+| Display / cards / karaoke captions | **Anton** (uppercase, weight 400, letter-spacing `0` — never negative) | **Karantina 700** (condensed: size it ~1.25× what you'd give Assistant) | Always uppercase for English, never title case. |
+| Body / glass-card body copy / chip text | **Inter** (400 / 500 / 600 / 700) | **Assistant** (500 / 700 / 800) | Use only when the card has secondary body copy beneath the display title. Line-height 1.4 inside cards. |
+| Numbers / counters / stats | **Anton** | **Karantina 700** | Treat numbers as display text, never body. |
 | Code / mono (terminal cards, paths) | **JetBrains Mono** | — | For typewriter-style code reveals. |
 
 **Hebrew direction:** `dir="rtl"` on every Hebrew caption container. Use `python-bidi`'s `get_display()` only in PIL fallback paths; CSS handles RTL natively. Logical CSS properties (`margin-inline-*`, `padding-inline-*`) preferred over physical (`margin-left`).
 
-**Banned:** serif fonts as defaults, system-ui stack, Anton on Hebrew text (renders as hollow X — Anton is Latin-only).
+**Banned:** Rubik, Heebo and Suez One (retired), serif fonts as defaults, system-ui stack, Anton on Hebrew text (renders as hollow X — Anton is Latin-only).
 
-### Color palette
+### Color palette (Phoenix Ink, inside the MP4)
 
-The canonical YUV.AI palette and its video-tuned counterparts:
-
-| Role | Web canonical | Video-rendered (use inside MP4) | Why the deviation |
-|---|---|---|---|
-| Off-white / paper | `#FAFAF7` | `#F5F0E1` (warmer) | Reads warmer over dark stages with text-stroke; reduces the "blue-white glare" effect on H264. |
-| Yellow / accent | `#E5FF00` | `#FFE61E` | Slightly more saturated; punches through black text-stroke at small sizes. |
-| Pink / brand thread | `#FF1464` | `#FF1464` | Same. Use as glass-card border accents, key-moment strip stroke, brand thread. |
-| Black / stage | `#0A0A0A` | `#0c0e16` (warm near-black) | Avoids pure black banding under H264. |
-| Charcoal / text on light | `#1A1A1A` | — | UI overlays only (preview pages, never inside the rendered MP4). |
-| Bone / cream | `#F5EEE4` | — | Web pages, never inside the MP4. |
+| Role | Value | Use |
+|---|---|---|
+| Stage / dark BG | night `#0E0D2A` → `#14123A` (the night sky: `#0A0922 → #15133C` with soft pink / violet / orange glows) | Layout-B backgrounds, letterbox fill, end card |
+| Text | `#FFFFFF`, secondary `#CFCDEB` | Captions, card text |
+| Brand thread | pink `#FF2EA0` (on night text: `#FF8FCC`) | Glass-card border accents, key-moment strip stroke, emphasis words, the CTA pill |
+| Marker / active word | gold `#FFD66E` (marker block: `linear-gradient(180deg,#FFD66E,#F4B030)` with ink `#1C1A4B` text) | Active karaoke word, one key word per card |
+| Tiny accents | violet `#8B6CFF`, cyan `#5DE4E9`, orange `#FF8F3A` | Glows and small marks only |
 
 **Banned in any rendered output:**
 
-- Pure `#FFFFFF` — always replace with the warmer off-white.
-- Blue accents (navy, slate, indigo, cool gray) unless the source brand requires them.
+- Every retired system listed at the top of yuv-design-system: Fly High purple `#5E17EB` + yellow `#FFEC00`, neon `#FF1464` + `#00E5FF`, Liquid Glass magenta + `#16D6E8`, Warm Editorial bone/cream.
+- Pure black stages (`#000`, `#0A0A0A`, `#0c0e16`) — use night.
 - Default Tailwind palette names (`slate-*`, `zinc-*`, `gray-*`, `emerald-*`, `cyan-*`, `indigo-*`, `violet-*`, `rose-*`).
 - Multicolor icon sets — Phosphor or Lucide single-stroke only.
 
 ### Layout & motion defaults
 
-- **Border radius:** glass cards use `40–56px` (signature soft-rounded). Pill CTAs `999px`. Never the 8/12px corporate-rounded middle ground.
-- **Shadows:** warm-toned (pink/orange undertone) — `0 20px 60px rgba(255, 20, 100, 0.12)` on glass cards, never the default blue-black `rgba(0,0,0,.1)`.
+- **Border radius:** glass cards use `36–56px` (signature soft-rounded). Pill CTAs `999px`. Never the 8/12px corporate-rounded middle ground.
+- **Shadows:** pink-tinted on light surfaces (`0 18px 40px rgba(255,46,160,.07)`), deep night on dark ones (`0 26px 60px rgba(14,13,42,.45)`); never the default blue-black `rgba(0,0,0,.1)`.
 - **Whitespace:** generous. Cards never fill more than 60% of the frame's free zone.
 - **Asymmetry over grid-perfect.** Offset cards. Overlap. One element breaking the grid.
 - **Grain:** 1–2% noise on any preview / catalog page (not inside the rendered MP4 — would compress to mush).
@@ -99,9 +96,9 @@ The canonical YUV.AI palette and its video-tuned counterparts:
 
 ### Inheritance rule
 
-If you are building any auxiliary surface (a preview page, a catalog, a dashboard, a render-status UI), apply the full `yuv-design-system` skill defaults — Anton + Inter typography, Fly High purple palette by default, signature components, brand assets. The `yuv-design-system` is the canonical source of truth for all Yuval-brand visuals.
+If you are building any auxiliary surface (a preview page, a catalog, a dashboard, a render-status UI), apply `yuv-design-system` in full: night hero / paper and cloud sections, pink accent, gold marker, its components, the real phoenix and wordmark, the canonical links. It is the canonical source of truth for all Yuval-brand visuals.
 
-If you are rendering the MP4 itself, apply the video-tuned values in the table above. Same brand, two delivery surfaces.
+If you are rendering the MP4 itself, apply the table above. Same brand, two delivery surfaces. Every shareable video ends on the phoenix + wordmark + links (yuv-design-system §8–§9).
 
 ## The live effects catalog (use this as the menu)
 
@@ -121,7 +118,7 @@ The catalog also contains a **prompt library** (effects.yuv.ai #prompts) with 8 
 
 Many edits will mix Hebrew narration with English brand tokens (Claude, GitHub, hyperframes, etc.). The skill must:
 
-1. **Per-glyph font routing** — Anton handles Latin, Rubik Black handles Hebrew. The single `font-family: 'Anton', 'Rubik', sans-serif` declaration on every text container does this automatically. Never apply Anton to a Hebrew character (it renders as a hollow X — Anton is Latin-only).
+1. **Per-glyph font routing** — Anton handles Latin, Karantina handles Hebrew. The single `font-family: 'Anton', 'Karantina', sans-serif` declaration on every display container does this automatically (body text: `'Inter', 'Assistant', sans-serif`). Never apply Anton to a Hebrew character (it renders as a hollow X — Anton is Latin-only).
 
 2. **RTL containers** — every Hebrew caption line gets `dir="rtl"` on its container. English brand tokens stay LTR within the same line via the browser's bidirectional algorithm — no manual reordering needed.
 
@@ -135,16 +132,16 @@ Many edits will mix Hebrew narration with English brand tokens (Claude, GitHub, 
 
 ## Lessons baked from production iterations
 
-The following were learned across real sessions and now live in `~/.claude/skills/yuv-design/lessons-learned.md`. Read that file before building any auxiliary frontend (preview page, render dashboard, catalog). The video pipeline itself is governed by the Hard Rules below — but any HTML/CSS surface this skill produces must respect:
+The video pipeline itself is governed by the Hard Rules below — but any HTML/CSS surface this skill produces (preview page, render dashboard, catalog) must respect yuv-design-system §2 and §5:
 
-- **Bilingual = toggle, not side-by-side** (lesson #1 in `lessons-learned.md`)
-- **Mobile = hamburger nav at ≤880px** (lesson #2)
-- **One display headline per section** (lesson #3)
-- **`document.title` is part of language toggle** (lesson #5)
-- **IntersectionObserver for any catalog with >8 demos** (lesson #9)
-- **Build comprehensive on first pass — don't iterate on scope** (lesson #10)
-- **`Claude-in-Chrome` for SPAs, `WebFetch` only for static HTML** (lessons #7, #15)
-- **Verify content from real source pages, never invent** (lesson #8)
+- **Bilingual = toggle, not side-by-side**
+- **Mobile = hamburger nav under ~940px**
+- **One display headline per section**
+- **`document.title` is part of language toggle**
+- **IntersectionObserver for any catalog with >8 demos**
+- **Build comprehensive on first pass — don't iterate on scope**
+- **`Claude-in-Chrome` for SPAs, `WebFetch` only for static HTML**
+- **Verify content from real source pages, never invent**
 
 ## When to consult this skill
 
@@ -183,7 +180,7 @@ final_<aspect>_V<N>.mp4
 
 These are correctness rules. Deviation produces silent failures or angry users.
 
-1. **Hebrew = Rubik Black. English = Anton uppercase.** Never mix. Never substitute. The two fonts are bundled in `assets/fonts/` because download URLs change. In hyperframes CSS, declare `font-family: Rubik` (weight 900) for Hebrew text and `font-family: Anton` for English; the compiler embeds them automatically.
+1. **Hebrew display = Karantina 700, Hebrew body = Assistant. English = Anton uppercase.** Never mix. Never substitute. The fonts are bundled in `assets/fonts/` (Karantina-Bold, Assistant-Bold/ExtraBold, Anton) because download URLs change. In hyperframes CSS, declare `font-family: Karantina` (weight 700) for Hebrew display, `Assistant` for Hebrew body and `Anton` for English; the compiler embeds them automatically.
 2. **Real CSS backdrop-filter for glass.** `backdrop-filter: blur(40px) saturate(160%)` on the card body. Do NOT pre-bake blur into a PNG. Do NOT use semi-transparent fills as a stand-in for blur — they look flat.
 3. **3D-tilt entrance for cards.** GSAP entrance: `scale 0.85 → 1.0`, `rotationY -12deg → 0`, `y +60 → 0` with `ease: "back.out(1.7)"` and `transformPerspective: 900`. No flat fade-ins.
 4. **Word-by-word karaoke synced to the transcript.** Active word: `scale 1.0` + accent color. Past/future words: `scale 1.0` at 55% opacity. Per-word `gsap.fromTo(scale 1.5 → 1.0, ease "back.out(2)", duration 0.16)` on activation.
@@ -236,7 +233,7 @@ If the source is HYBRID (some beats are full speaker, others screen-share), pick
   -webkit-backdrop-filter: blur(40px) saturate(160%);
   border: 1.5px solid rgba(255, 255, 255, 0.18);
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 26px 60px rgba(14, 13, 42, 0.5),
     inset 0 2px 0 rgba(255, 255, 255, 0.18);
   padding: 60px 50px;
   display: flex;
@@ -248,7 +245,7 @@ If the source is HYBRID (some beats are full speaker, others screen-share), pick
   will-change: transform, opacity;
 }
 .card.dark {
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(20, 18, 58, 0.62);
 }
 ```
 
@@ -278,16 +275,16 @@ CSS:
 
 ```css
 .cap-word {
-  font: 900 108px Rubik;
-  color: rgba(245, 240, 225, 0.55);   /* dim future/past */
-  text-shadow: 0 8px 18px rgba(0,0,0,.85), 0 0 28px rgba(0,0,0,.7);
-  -webkit-text-stroke: 4px #0c0e16;
+  font: 700 135px Karantina;           /* ~1.25× the old 108px: Karantina is condensed */
+  color: rgba(255, 255, 255, 0.55);    /* dim future/past */
+  text-shadow: 0 8px 18px rgba(14,13,42,.85), 0 0 28px rgba(14,13,42,.7);
+  -webkit-text-stroke: 4px #0E0D2A;
   transform-origin: center bottom;
 }
-.cap-word.en { font: 400 124px Anton; letter-spacing: 0.06em; color: rgba(255, 230, 30, 0.6); }
-.cap-word.active { color: #F5F0E1; }
-.cap-word.en.active { color: #FFE61E; }
-.cap-word.accent.active { color: #FFE61E; text-shadow: 0 0 20px rgba(255,230,30,.6); }
+.cap-word.en { font: 400 124px Anton; letter-spacing: 0; color: rgba(255, 214, 110, 0.6); }
+.cap-word.active { color: #FFFFFF; }
+.cap-word.en.active { color: #FFD66E; }
+.cap-word.accent.active { color: #FF8FCC; text-shadow: 0 0 20px rgba(255,46,160,.55); }
 ```
 
 GSAP per-word:
@@ -329,7 +326,7 @@ Keep amounts subtle. Anything ≥0.10 outside of WOW-class beats reads as "too m
 
 ## Bottom key-moment strips
 
-A small glass strip across the bottom summarising the current beat in 1–4 words. Hebrew on the right (RTL), English on the left (Anton uppercase), yellow accent stripe. Appears only on key beats — not every beat.
+A small glass strip across the bottom summarising the current beat in 1–4 words. Hebrew on the right (RTL), English on the left (Anton uppercase), pink border. Appears only on key beats — not every beat.
 
 ```css
 .km-strip {
@@ -338,9 +335,9 @@ A small glass strip across the bottom summarising the current beat in 1–4 word
   bottom: 30px;
   height: 110px;
   border-radius: 30px;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(20, 18, 58, 0.62);
   backdrop-filter: blur(30px);
-  border: 1.5px solid rgba(255, 230, 30, 0.55);
+  border: 1.5px solid rgba(255, 46, 160, 0.55);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -371,7 +368,7 @@ Mix in the video-use base layer (not in hyperframes) so the audio is committed b
 
 - **"Input frame sizes do not match (X vs Y)"** → odd target dimension. Round to even pixels for both W and H.
 - **Hebrew letters render reversed** → in CSS, set `dir="rtl"` on the container. In PIL fallbacks, wrap with `bidi.get_display()`.
-- **Hebrew avatar letter renders as hollow X** → using Anton font for a Hebrew character. Anton is Latin-only. Switch to Rubik for any text containing Hebrew.
+- **Hebrew avatar letter renders as hollow X** → using Anton font for a Hebrew character. Anton is Latin-only. Switch to Karantina (display) or Assistant (body) for any text containing Hebrew.
 - **`Filter 'split' has output 0 unconnected`** → declared a split but didn't consume one of its outputs. Check labels match.
 - **Speaker looks horizontally squished** → non-uniform scale on the PIP source crop. Match target aspect to source aspect.
 - **Speaker forehead/hair cut off in PIP** → source crop `y` started too low. For a 2560×1440 source where the speaker fills the frame, start `y ≈ 80`, not 200+.
@@ -422,7 +419,7 @@ If the user drops a video and asks for an edit, the output:
 3. Has every card text traceable to a real spoken word in the transcript.
 4. Renders both 9:16 AND 16:9.
 5. Saves with `_V<N>` so the previous version is preserved.
-6. Uses Rubik for Hebrew, Anton uppercase for English. Always.
+6. Uses Karantina + Assistant for Hebrew, Anton uppercase for English, and Phoenix Ink colours. Always.
 7. Never covers the speaker's face.
 8. Uses **hyperframes** for the visual composition (real CSS backdrop-filter, GSAP springy easing, Hollywood-grade animation).
 
