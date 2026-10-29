@@ -299,6 +299,7 @@ and drop the folder on Vercel / Netlify / Cloudflare Pages.
 - `funnel_report.py` (funnel by stage with leak rates, breakdowns by placement/age/hour) and `check_pixel.py` (catches missing pixels, leftover pixels, and the ad-account-ID-pasted-as-pixel mistake)
 - `create_campaign.py` now runs existing Instagram posts as ads, CBO, pixel-event optimization and placement presets, validates everything with Meta before creating, refuses accounts without a payment method, and can resume a half-built run
 - **NEW: real sales from the course platform.** Connects to the Schooler MCP (or any checkout platform) to reconcile Meta's attributed purchases with actual enrollments, and turns the data into the cheapest sales you have: people who signed up but didn't pay, past buyers of one course who don't own the next, and students who paid but never started (`segment_students.py`)
+- **NEW: runs in Grok Bot too.** `sh scripts/install-grok-bot.sh --skill meta-ads` installs it into a bot's skill library; a dedicated analyst bot runs the daily check as a routine and alerts you on Telegram/WhatsApp, while every change still waits for your approval
 - Hard-won traps documented: Audience Network eating conversion budgets, Advantage+ age stretch, reporting lag, IG posts turning into zero-like ad copies, boost pickers that hide ad-account-owned pixels, deprecated creative enhancements
 
 ---
