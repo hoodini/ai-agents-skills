@@ -1,0 +1,33 @@
+{
+  "campaign_name": "Course | Sales | IC | IL | 2026-01-01",
+  "objective": "OUTCOME_SALES",
+  "status": "PAUSED",
+  "special_ad_categories": [],
+  "campaign_daily_budget": 120,
+  "identity": {
+    "page_id": "<PAGE_ID>",
+    "instagram_user_id": "<INSTAGRAM_BUSINESS_ACCOUNT_ID>"
+  },
+  "landing_url": "https://example.com/",
+  "url_tags": "utm_source=meta&utm_medium=paid&utm_campaign=course&utm_content={{ad.name}}",
+  "ad_sets": [
+    {
+      "name": "IL 25+ | Adv+ audience | FB+IG | existing posts",
+      "optimization_goal": "OFFSITE_CONVERSIONS",
+      "billing_event": "IMPRESSIONS",
+      "promoted_object": { "pixel_id": "<PIXEL_ID>", "custom_event_type": "INITIATED_CHECKOUT" },
+      "targeting": {
+        "countries": ["IL"],
+        "age_min": 25,
+        "age_max": 65,
+        "advantage_audience": true,
+        "placements": "fb_ig_all"
+      },
+      "ads": [
+        { "name": "proof-reel",    "source_instagram_media_id": "<IG_MEDIA_ID_1>", "cta": "SIGN_UP" },
+        { "name": "press-reel",    "source_instagram_media_id": "<IG_MEDIA_ID_2>", "cta": "SIGN_UP" },
+        { "name": "teaser-reel",   "source_instagram_media_id": "<IG_MEDIA_ID_3>", "cta": "SIGN_UP" }
+      ]
+    }
+  ]
+}

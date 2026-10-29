@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Discover every ad account the current token can see.
 
-This is the FIRST script to run after auth_check — it's the answer to
+This is the FIRST script to run after auth_check - it's the answer to
 "which ad account should I use?" when the user has many.
 
 By default, returns ALL accounts (ACTIVE, UNSETTLED, DISABLED, CLOSED, etc.)
@@ -30,7 +30,7 @@ from meta_client import MetaAPIError, get, paginate, print_json
 STATUS_NAMES = {
     1: "ACTIVE",
     2: "DISABLED",
-    3: "UNSETTLED",  # outstanding unpaid balance — reads still work, no new spend
+    3: "UNSETTLED",  # outstanding unpaid balance - reads still work, no new spend
     7: "PENDING_RISK_REVIEW",
     8: "PENDING_SETTLEMENT",
     9: "IN_GRACE_PERIOD",
@@ -41,7 +41,7 @@ STATUS_NAMES = {
 }
 
 # Currencies Meta returns amount_spent in minor units (hundredths).
-# JPY, KRW, VND etc. are returned in whole units — no divide.
+# JPY, KRW, VND etc. are returned in whole units - no divide.
 # Full list: https://developers.facebook.com/docs/marketing-api/currencies
 ZERO_DECIMAL_CURRENCIES = {"JPY", "KRW", "VND", "CLP", "ISK", "UGX", "XAF", "XOF", "TWD"}
 
@@ -67,7 +67,7 @@ def fetch_recent_spend(account_id: str) -> dict:
     """Fetch last-30-day spend + last-7-day spend for a single account.
 
     Returns {"last_30d_spend": float, "last_7d_spend": float} in major units.
-    Returns zeros on error (some accounts reject insights queries — skip quietly).
+    Returns zeros on error (some accounts reject insights queries - skip quietly).
     """
     out = {"last_30d_spend": 0.0, "last_7d_spend": 0.0}
     for preset, key in [("last_30d", "last_30d_spend"), ("last_7d", "last_7d_spend")]:
@@ -96,7 +96,7 @@ def main() -> int:
         action="store_true",
         help=(
             "Fetch last-30-day and last-7-day spend for each account. "
-            "One extra API call per account — slower but tells you which "
+            "One extra API call per account - slower but tells you which "
             "accounts are actually running right now."
         ),
     )
@@ -181,7 +181,7 @@ def main() -> int:
     has_disabled = any(a["status_code"] == 2 for a in accounts)
     if has_disabled:
         hint_parts.append(
-            "Some accounts are DISABLED — likely policy issues; insights may still read."
+            "Some accounts are DISABLED - likely policy issues; insights may still read."
         )
 
     print_json(

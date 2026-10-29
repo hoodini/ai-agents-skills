@@ -295,6 +295,10 @@ and drop the folder on Vercel / Netlify / Cloudflare Pages.
 - Creative fatigue detection, anomaly detection vs. prior period, CTWA-aware analysis playbooks
 - Write actions (pause, budget update, duplicate) gated behind explicit confirmation with impact summaries and rollback patterns
 - Baked-in troubleshooting for every failure mode we hit the hard way: sandbox proxy blocks, 37-month data wall, DELETED-status error 1815001, minor-unit currency bugs, IG boosts invisible to SU tokens, and more
+- **NEW: works as your PPC operator, not just a reporter.** An end-to-end loop for selling: map the funnel, install and verify the Meta Pixel on every page (including third-party checkouts, with a real test purchase), launch a Sales campaign that can actually learn, read it stage by stage, fix leaks live, build stage-by-stage remarketing, and monitor daily
+- `funnel_report.py` (funnel by stage with leak rates, breakdowns by placement/age/hour) and `check_pixel.py` (catches missing pixels, leftover pixels, and the ad-account-ID-pasted-as-pixel mistake)
+- `create_campaign.py` now runs existing Instagram posts as ads, CBO, pixel-event optimization and placement presets, validates everything with Meta before creating, refuses accounts without a payment method, and can resume a half-built run
+- Hard-won traps documented: Audience Network eating conversion budgets, Advantage+ age stretch, reporting lag, IG posts turning into zero-like ad copies, boost pickers that hide ad-account-owned pixels, deprecated creative enhancements
 
 ---
 
@@ -557,7 +561,7 @@ Agent Skills work with these AI coding agents:
 | **[parallax-landing-page](skills/parallax-landing-page/SKILL.md)** 🆕 | Cinematic scroll-scrub landing page from a short video — locked body, virtual scroll, 5 crossfading scenes, Anton + Caveat typography | `parallax landing`, `scroll-scrub`, `frame-by-frame`, `Anton`, `Caveat`, `locked hero`, `virtual scroll`, `video to landing page` |
 | **[video-edit](skills/video-edit/SKILL.md)** 🆕 | Captioned-video pipeline with interactive transcript editor + WebLLM suggestions before render | `video edit`, `captions`, `transcribe`, `Hebrew`, `WebLLM`, `liquid-glass captions`, `HyperFrames` |
 | **[video-to-landing-page](skills/video-to-landing-page/SKILL.md)** 🆕 | Apple-style scroll-driven landing page from any video — frames scrub on scroll | `landing page from video`, `scroll-frame`, `Apple scroll`, `scrub on scroll` |
-| **[meta-ads](skills/meta-ads/SKILL.md)** 🆕 | Meta Marketing API — Facebook, Instagram, CTWA ad insights, fatigue analysis, write actions | `Meta ads`, `Facebook ads`, `Instagram ads`, `Marketing API`, `ROAS`, `CPA`, `CTR`, `CTWA`, `creative fatigue` |
+| **[meta-ads](skills/meta-ads/SKILL.md)** 🆕 | Meta Ads as a PPC operator: pixel setup and verification, Sales campaigns, funnel diagnosis, live optimization, stage-by-stage remarketing, daily monitoring | `Meta ads`, `Facebook ads`, `Instagram ads`, `Meta Pixel`, `Sales campaign`, `remarketing`, `ROAS`, `CPA`, `CTWA`, `creative fatigue` |
 | **[google-workspace-cli](skills/google-workspace-cli/SKILL.md)** 🆕 | Google Workspace CLI (`gws`) — Drive, Gmail, Calendar, Sheets, Docs, Chat & more | `gws`, `Google Workspace`, `Google Drive`, `Gmail`, `Google Calendar`, `Google Sheets`, `MCP` |
 | **[copilot-sdk](skills/copilot-sdk/SKILL.md)** | GitHub Copilot SDK for building agentic applications | `Copilot SDK`, `GitHub SDK`, `agentic app`, `embed Copilot` |
 | **[honest-agent](skills/honest-agent/SKILL.md)** 🆕 | Configure all AI agents for honest, objective feedback | `honest agent`, `no sycophancy`, `objective`, `contradict me` |

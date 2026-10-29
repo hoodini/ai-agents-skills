@@ -3,14 +3,14 @@
 
 WRITE OPERATION. Read references/write-actions.md before invoking.
 The skill is responsible for getting explicit user confirmation before
-running this — the script will execute as soon as called (unless --dry-run).
+running this - the script will execute as soon as called (unless --dry-run).
 
 Usage:
   python scripts/pause_ad.py --object-id 12345 --status PAUSED
   python scripts/pause_ad.py --object-id 12345 --status ACTIVE
   python scripts/pause_ad.py --object-id 12345 --status PAUSED --dry-run
 
-Object can be a campaign, ad set, or ad ID — Meta's POST endpoint is
+Object can be a campaign, ad set, or ad ID - Meta's POST endpoint is
 the same shape for all of them.
 """
 

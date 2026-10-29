@@ -13,7 +13,7 @@ Usage:
   # the long-lived token to stdout as JSON.
   python scripts/exchange_token.py
 
-  # Or pass the short-lived token as an arg (less safe — shows in shell history):
+  # Or pass the short-lived token as an arg (less safe - shows in shell history):
   python scripts/exchange_token.py --short-token EAAxxx...
 
   # Write the exchanged token into .env automatically (replaces META_ACCESS_TOKEN):
@@ -151,7 +151,7 @@ def main() -> int:
             "env_action": env_action,
             "reminder": (
                 "Delete the short-lived token from wherever you pasted it. "
-                "The long-lived token is good for ~60 days — set a calendar "
+                "The long-lived token is good for ~60 days - set a calendar "
                 "reminder to regenerate."
             ),
         }

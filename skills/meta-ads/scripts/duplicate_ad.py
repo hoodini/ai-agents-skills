@@ -9,7 +9,7 @@ it to start a fresh learning phase, then optionally edit the new copy
 PAUSED so it doesn't immediately start spending.
 
 Meta exposes a `/copies` endpoint on every level. The behavior differs
-slightly by object type — see references/write-actions.md.
+slightly by object type - see references/write-actions.md.
 
 Usage:
   # Duplicate a campaign (PAUSED by default)

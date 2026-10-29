@@ -95,7 +95,7 @@ def main() -> int:
     if len(ad_accounts) == 0:
         surprises.append(
             "Token is valid but sees zero ad accounts. "
-            "If you boost from the Instagram app, your account is probably personal — "
+            "If you boost from the Instagram app, your account is probably personal - "
             "use a user token (Path B) instead of a System User token."
         )
 

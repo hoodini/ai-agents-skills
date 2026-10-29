@@ -117,7 +117,7 @@ def _request(
 
     `path` should start with the object ID or edge, e.g.
     "act_123/insights" or "1234567890". Don't include the leading slash
-    or the version — those are added here.
+    or the version - those are added here.
     """
     version = get_version()
     url = f"{GRAPH_BASE}/{version}/{path.lstrip('/')}"
@@ -232,7 +232,7 @@ def print_json(obj: Any) -> None:
 def start_async_insights_job(account_id: str, params: dict) -> str:
     """Start an async insights report. Returns the report run ID.
 
-    Use this when a sync insights query would time out — e.g., very long
+    Use this when a sync insights query would time out - e.g., very long
     date ranges or many breakdowns. Poll with `poll_async_job`.
     """
     account_id = normalize_account_id(account_id)

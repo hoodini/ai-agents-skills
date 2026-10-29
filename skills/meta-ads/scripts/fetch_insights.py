@@ -95,7 +95,7 @@ VALID_DATE_PRESETS = {
 
 VALID_LEVELS = {"account", "campaign", "adset", "ad"}
 
-# Common breakdowns. Meta supports many more — see references/insights-fields.md.
+# Common breakdowns. Meta supports many more - see references/insights-fields.md.
 COMMON_BREAKDOWNS = {
     "age",
     "gender",
@@ -180,7 +180,7 @@ def main() -> int:
         "--object-id",
         help=(
             "Object to query insights on. Defaults to the env ad account. "
-            "Can be a campaign ID, adset ID, or ad ID — the response will "
+            "Can be a campaign ID, adset ID, or ad ID - the response will "
             "be scoped to that object."
         ),
     )
