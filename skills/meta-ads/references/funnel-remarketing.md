@@ -1,5 +1,7 @@
 # Remarketing by funnel stage
 
+This is the implementation guide for the re-engage and close layers. The full ladder (including video-viewer and engaged-visitor rungs, lookalikes, testing and scaling rules) is in `full-funnel-system.md`.
+
 People drop off at different stages for different reasons. Each stage gets its own audience and its own message. This is usually the cheapest revenue in an account, once the audiences are big enough to deliver.
 
 ## The stages

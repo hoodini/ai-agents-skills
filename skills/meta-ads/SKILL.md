@@ -28,7 +28,7 @@ The scripts themselves are pure Python with one dependency (`requests`) and no s
 
 ## The operator loop (the main workflow for selling)
 
-When the user wants sales, not just a report, run these phases in order. Each has its reference file; read it when you reach that phase.
+When the user wants sales, not just a report, run these phases in order. Each has its reference file; read it when you reach that phase. **The system that ties them together is `references/full-funnel-system.md`**: signal inventory, the intent ladder (who is at which stage and what stops them), audiences per rung with exclusions, campaign architecture (prospecting / re-engage / close), creative per rung, the testing order and the keep/kill/scale/shift rules. Read it before designing audiences or campaigns, and again whenever you analyse results.
 
 1. **Map the funnel and settle the account** (`references/pixel-setup.md` steps 0-1). Where does each step happen (landing page, checkout platform, payment)? Which ad account pays, does it have a payment method, is it in a Business? Decide ONE ad account and ONE pixel before anything else; switching later costs a re-install everywhere and resets learning.
 2. **Install the pixel and verify it in three layers** (`references/pixel-setup.md`): installed on every page (`check_pixel.py`), calls made, events received in Test events, then a real ~99%-coupon purchase. Find out what events the checkout platform already sends by reading its JS, and give every funnel step a unique standard event.
@@ -37,7 +37,7 @@ When the user wants sales, not just a report, run these phases in order. Each ha
 5. **Day 0 structural check**: after the first ~50 in spend run `funnel_report.py --breakdowns placement,age`. Fix structural leaks now (e.g. Audience Network eating the budget) while a learning reset is cheap.
 6. **Days 1-3: hands off.** Daily read-only check; fix only what's broken.
 7. **Day 4+: decide by the table** in the playbook: scale in 20-30% steps, swap the weakest creative, or fix the leaking funnel stage (`rates_pct` in `funnel_report.py`).
-8. **Remarketing by stage** once audiences are big enough (`references/funnel-remarketing.md`): one audience and one message per stage, separate campaign, purchasers excluded.
+8. **Cover every rung of the intent ladder** (`references/full-funnel-system.md`, `references/funnel-remarketing.md`): instrument the gaps (landing-page engagement events, the checkout platform's registration URL, customer lists), build mutually exclusive audiences from video viewers to checkout abandoners, give each rung its own message and creative (write the text, brief the user on what to film), and run re-engage and close campaigns with their own budgets. Then test one variable at a time and move money by marginal CPA.
 9. **Reconcile with the sales platform and sell to warm segments** (`references/sales-platform-data.md`): pull real enrollments (e.g. Schooler MCP), compare with Meta's attributed purchases, and build segments: signed up but didn't pay, bought A but not B, paid but never started. These are the cheapest sales in the business.
 10. **Monitor proactively** (`references/monitoring.md`): a scheduled daily read-only report against break-even, with at most two recommended actions.
 
@@ -187,6 +187,7 @@ Read these on demand, not all upfront.
 - `references/analysis-playbooks.md` - Patterns for creative fatigue, audience analysis, funnel diagnosis, anomaly response. Read this when the user asks for analysis, not just data.
 - `references/write-actions.md` - Mandatory before any write call. Confirmation flow, safety thresholds, rollback patterns - including the campaign-creation section before using `create_campaign.py`.
 - `references/campaign-creation.md` - Spec format, field reference, currency handling, interest resolution, state file and rollback details for `create_campaign.py`. Read this when the user asks to launch a campaign, A/B test, or new ad flight from scratch.
+- `references/full-funnel-system.md` - The doctrine: every signal Meta and the stack can capture, the intent ladder (L0 cold to L8 buyer, with video-depth and engagement rungs), audience recipes and exclusions, lookalikes, campaign architecture and budget split, creative per rung and hooks, the testing order and minimum data, keep/kill/iterate/scale/shift rules, weekly rhythm. Read before designing any funnel.
 - `references/pixel-setup.md` - From zero to a verified funnel: account/pixel ownership decisions, Pixel vs CAPI, event naming per funnel step, reading a checkout platform's real events, the three-layer verification and the real test purchase. Read before any conversion campaign.
 - `references/ppc-operator-playbook.md` - The live operating loop: economics, launch checklist, day-by-day rules, decision table, stage-leak diagnosis, known traps (Audience Network, age stretch, reporting lag, IG post copies), money-now levers, how to report.
 - `references/funnel-remarketing.md` - Stage-by-stage remarketing: audiences, exclusions, sizing limits, structure, API rule shape, creative per stage.

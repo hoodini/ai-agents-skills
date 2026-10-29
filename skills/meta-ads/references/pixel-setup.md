@@ -77,6 +77,13 @@ Minimal landing-page pattern:
 </script>
 ```
 
+## Step 4b. Instrument the gaps between stages
+
+Two stages that no event separates can't get different ads. Close the usual gaps:
+- **Engaged vs bounced on the landing page:** add an `EngagedVisit` custom event (30 seconds or 60% scroll) and a `PageVideoPlay` event for the page's video. Snippet in full-funnel-system.md section 4.
+- **Registered vs not on a third-party checkout:** platforms rarely fire a pixel event on registration. Find the route the platform moves people to after registering (read its JS bundle for route strings, e.g. a cart route) and build a URL-contains audience on it. Confirm in Events Manager that PageViews with that URL arrive (single-page apps report route changes as PageViews only if the pixel's history tracking catches them).
+- **Identified stages:** the mailing tool's "signed up" and "paid" lists cover registered people by email from the first person, and can be uploaded as customer lists for ads.
+
 ## Step 5. Check what could block it
 
 - A `Content-Security-Policy` header without `connect.facebook.net` and `www.facebook.com` silently blocks the pixel. Check the host's header config (`netlify.toml`, `vercel.json`, `_headers`, server config).
