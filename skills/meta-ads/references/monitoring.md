@@ -30,12 +30,16 @@ Steps:
    (from the skill folder, with the .env loaded). If it fails, report the error and stop.
 2. python scripts/check_pixel.py --pixel-id [id] --ad-account-id [act_] [landing] [checkout]
    Any flag other than OK is the top alert.
-3. Analyse with references/ppc-operator-playbook.md: learning phase (don't-touch days),
+3. If the sales platform is connected (e.g. Schooler MCP, see references/sales-platform-data.md):
+   list_course_students for [course id]. Report new enrollments since yesterday, the current
+   "interested" (signed up, didn't pay) names, paid-but-not-started count, and enrollments since
+   launch next to Meta's attributed purchases. Counts in the report; names only for the people to contact.
+4. Analyse with references/ppc-operator-playbook.md: learning phase (don't-touch days),
    decision table vs [B] and [T], stage leaks via rates_pct, placement/age anomalies,
    frequency > 3, remarketing readiness (references/funnel-remarketing.md).
-4. Report: one-line status; money (spend, purchases, cost per purchase, revenue, ROAS);
+5. Report: one-line status; money (spend, purchases, cost per purchase, revenue, ROAS);
    funnel by stage; per-ad table; one or two recommended actions with why.
-5. Save to [project]/ads/reports/YYYY-MM-DD.md and send a one-line notification if available.
+6. Save to [project]/ads/reports/YYYY-MM-DD.md and send a one-line notification if available.
 ```
 
 ## What a good daily report looks like
