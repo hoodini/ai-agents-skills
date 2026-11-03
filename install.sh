@@ -3,7 +3,7 @@
 # YUV.AI Skills · One-shot installer for any machine
 # Sets up the FULL creative stack:
 #   Orchestrator — yuv-pilot (top-of-pyramid router)
-#   Design       — yuv-design-system
+#   Design       — yuv-design-system lives in a private repo (hoodini/yuv-design-system); install it from there
 #   Decks        — yuv-decks
 #   Videos       — yuv-viral-video, video-edit, video-to-landing-page,
 #                  parallax-landing-page, video-use
@@ -171,14 +171,13 @@ git clone --depth 1 --sparse \
     skills/director \
     skills/yuv-decks \
     skills/yuv-viral-video \
-    skills/yuv-design-system \
     skills/video-edit \
     skills/video-to-landing-page \
     skills/parallax-landing-page \
     skills/nano-banana-pro \
     skills/mermaid-diagrams >/dev/null 2>&1 )
 
-for skill in yuv-pilot director yuv-decks yuv-viral-video yuv-design-system video-edit video-to-landing-page parallax-landing-page nano-banana-pro mermaid-diagrams; do
+for skill in yuv-pilot director yuv-decks yuv-viral-video video-edit video-to-landing-page parallax-landing-page nano-banana-pro mermaid-diagrams; do
   if [ -d "$HOME/.claude/skills/$skill" ]; then
     info "$skill already exists — refreshing"
     rm -rf "$HOME/.claude/skills/$skill"
@@ -196,7 +195,6 @@ step "Creating cross-tool symlinks for the YUV.AI pyramid"
 PYRAMID_SKILLS=(
   yuv-pilot
   director
-  yuv-design-system
   yuv-decks
   yuv-viral-video
   video-edit
@@ -351,7 +349,7 @@ INSTALLED_SKILLS=$(ls "$HOME/.claude/skills" | tr '\n' ' ')
 ok "Installed skills: $INSTALLED_SKILLS"
 
 ALL_GOOD=1
-for skill in yuv-pilot yuv-decks yuv-viral-video yuv-design-system video-edit video-to-landing-page parallax-landing-page nano-banana-pro mermaid-diagrams video-use hyperframes hyperframes-cli hyperframes-registry gsap website-to-hyperframes; do
+for skill in yuv-pilot yuv-decks yuv-viral-video video-edit video-to-landing-page parallax-landing-page nano-banana-pro mermaid-diagrams video-use hyperframes hyperframes-cli hyperframes-registry gsap website-to-hyperframes; do
   if [ -e "$HOME/.claude/skills/$skill" ]; then
     ok "$skill"
   else
