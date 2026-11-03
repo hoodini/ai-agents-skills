@@ -143,21 +143,9 @@ Pairs with `parallax-landing-page` (scroll-scrub frames, page never moves) and `
 
 ---
 
-## 🆕 NEW: yuv-design-system — single source of truth for visuals
+## yuv-design-system has moved
 
-Yuval Avidani's canonical design system, now public. **Replaces** the prior `yuv-design` skill (which only covered the Warm Editorial pink/yellow/bone family). Encodes:
-
-- **Two palette modes** — **Fly High** (purple `#5E17EB` + yellow `#FFEC00` + grey, the default for keynotes / dashboards / dev-facing UIs) and **Warm Editorial** (pink + yellow + bone, only for the Hope / bigcats / practical.yuv.ai brand family)
-- **Mandatory typography** — Anton + Inter for English, Rubik + Assistant for Hebrew, letter-spacing 0 by default
-- **Signature components** — `PurpleBar`, `YellowUnderline`, `FlightHUD`, `CompassDial`, `CounterUp`, `HeroBg`
-- **Brand assets bundled** — 4 phoenix logos + studio portrait, with a 4-step asset-retrieval fallback chain for any machine
-- **Canonical link set + bio** — auto-included on any footer / about / credits block
-- **Lessons-learned reference** — 15 hardened production patterns (bilingual toggle, mobile hamburger threshold, Anton letter-spacing rules, yellow-span `line-height ≥ 1.0`, IntersectionObserver for GSAP catalogs, GH Pages cert nudge, …)
-- **Pre-flight checklist** — 14 mandatory checks before any visual ships
-
-🔗 **[View yuv-design-system →](skills/yuv-design-system/SKILL.md)**
-
-Pairs with `yuv-decks` (cinematic presentation builder), `yuv-viral-video` (short-form video), and `hyperframes` (capture web → MP4). Project brand wins when explicitly specified; otherwise this skill fills the vacuum.
+The YUV.AI design system is now **Phoenix Sky v4.1** and lives in a private repo (`hoodini/yuv-design-system`), installed from there. The old public copy (Fly High purple/yellow, Warm Editorial, PurpleBar, FlightHUD) is retired; [`skills/yuv-design-system`](skills/yuv-design-system/SKILL.md) is now only a pointer, and `install.sh` no longer installs it, so it can never overwrite the current system.
 
 ---
 
@@ -557,7 +545,7 @@ Agent Skills work with these AI coding agents:
 |:------|:------------|:---------|
 | **[aws-harness](skills/aws-harness/SKILL.md)** 🆕 | Build a new agent AND deploy it easily on AWS, or wrap + ship an agent you already have, via the Bedrock AgentCore harness - CLI (create/dev/deploy/invoke) plus SDK-wrap and FastAPI/Docker/ECR paths, every import verified | `agent harness`, `AWS harness`, `AgentCore`, `agentcore create`, `agentcore deploy`, `deploy agent on AWS`, `bring your own agent` |
 | **[director](skills/director/SKILL.md)** 🆕 | Award-winning director's brain — a 28-chapter film + AI-production Bible (~108k words) wrapped in a gated, interrogation-first workflow that locks the IDEA and SCRIPT before generating a single pixel, then plans shots/camera/light/sound, then generates. Honest neuroscience (no dopamine-as-pleasure myths), current AI image/video model selection, character-consistency SOP, first/last-frame keyframing | `director`, `video`, `film`, `teaser`, `trailer`, `storyboard`, `script`, `screenwriting`, `documentary`, `סרטון`, `טיזר`, `תסריט`, `סטוריבורד` |
-| **[yuv-design-system](skills/yuv-design-system/SKILL.md)** 🆕 | Yuv's canonical visual brand — Fly High purple (default) + Warm Editorial pink, Anton/Inter + Rubik/Assistant, signature components, brand assets, canonical bio/links, 15 hardened production patterns | `design system`, `brand`, `Fly High`, `Warm Editorial`, `Anton`, `Rubik`, `PurpleBar`, `YellowUnderline`, `FlightHUD`, `yuv.ai` |
+| **[yuv-design-system](skills/yuv-design-system/SKILL.md)** | Moved to a private repo (Phoenix Sky v4.1). This folder is a pointer only; the old Fly High system is retired | `design system`, `brand`, `Fly High`, `Warm Editorial`, `Anton`, `Rubik`, `PurpleBar`, `YellowUnderline`, `FlightHUD`, `yuv.ai` |
 | **[yuv-decks](skills/yuv-decks/SKILL.md)** 🆕 | Open-slide cinematic deck builder — 4-act narrative arc, Yuval voice, JourneyBar, reusable templates, automatic nano-banana + Hyperframes orchestration | `deck`, `presentation`, `slides`, `talk`, `keynote`, `open-slide`, `cinematic deck`, `מצגת`, `שקפים` |
 | **[yuv-viral-video](skills/yuv-viral-video/SKILL.md)** | Short-form video editor — liquid-glass cards, dark-mode, MrBeast-paced cuts, karaoke captions, ALWAYS 9:16 + 16:9, never covers the speaker's face | `viral video`, `reel`, `short`, `selfie edit`, `liquid glass`, `karaoke captions`, `ויראלי`, `ריל` |
 | **[parallax-landing-page](skills/parallax-landing-page/SKILL.md)** 🆕 | Cinematic scroll-scrub landing page from a short video — locked body, virtual scroll, 5 crossfading scenes, Anton + Caveat typography | `parallax landing`, `scroll-scrub`, `frame-by-frame`, `Anton`, `Caveat`, `locked hero`, `virtual scroll`, `video to landing page` |
