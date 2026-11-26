@@ -115,9 +115,9 @@ export default async function Post({ params }: { params: { id: string } }) {
 }
 ```
 
-## Redis (Upstash)
+## Upstash Redis
 
-Install Upstash Redis from the Vercel Marketplace and use `@upstash/redis`. `Redis.fromEnv()` reads `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` or the `KV_REST_API_URL`/`KV_REST_API_TOKEN` vars the integration sets.
+Use `@upstash/redis`. `Redis.fromEnv()` reads `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` or the `KV_REST_API_URL`/`KV_REST_API_TOKEN` vars the integration sets.
 
 ```typescript
 import { Redis } from '@upstash/redis';
