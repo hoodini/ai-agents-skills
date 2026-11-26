@@ -115,10 +115,14 @@ export default async function Post({ params }: { params: { id: string } }) {
 }
 ```
 
-## Vercel KV (Redis)
+## Redis (Upstash)
+
+Vercel KV has been replaced by Upstash Redis, installed from the Vercel Marketplace. `@vercel/kv` is deprecated; use `@upstash/redis`. `Redis.fromEnv()` reads `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` or the `KV_REST_API_URL`/`KV_REST_API_TOKEN` vars the integration sets.
 
 ```typescript
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+const kv = Redis.fromEnv();
 
 // Set
 await kv.set('user:123', { name: 'Alice', visits: 0 });
@@ -202,3 +206,4 @@ export default function handler(req, res) {
 
 - **Vercel Docs**: https://vercel.com/docs
 - **Next.js on Vercel**: https://vercel.com/docs/frameworks/nextjs
+- **Upstash Redis SDK**: https://upstash.com/docs/redis/sdks/ts/overview
