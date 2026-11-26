@@ -115,10 +115,14 @@ export default async function Post({ params }: { params: { id: string } }) {
 }
 ```
 
-## Vercel KV (Redis)
+## Upstash Redis
+
+Use `@upstash/redis`.
 
 ```typescript
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+const kv = Redis.fromEnv();
 
 // Set
 await kv.set('user:123', { name: 'Alice', visits: 0 });
@@ -202,3 +206,4 @@ export default function handler(req, res) {
 
 - **Vercel Docs**: https://vercel.com/docs
 - **Next.js on Vercel**: https://vercel.com/docs/frameworks/nextjs
+- **Upstash Redis SDK**: https://upstash.com/docs/redis/sdks/ts/overview
