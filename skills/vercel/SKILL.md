@@ -117,7 +117,7 @@ export default async function Post({ params }: { params: { id: string } }) {
 
 ## Redis (Upstash)
 
-Vercel KV has been replaced by Upstash Redis, installed from the Vercel Marketplace. `@vercel/kv` is deprecated; use `@upstash/redis`. `Redis.fromEnv()` reads `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` or the `KV_REST_API_URL`/`KV_REST_API_TOKEN` vars the integration sets.
+Install Upstash Redis from the Vercel Marketplace and use `@upstash/redis`. `Redis.fromEnv()` reads `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` or the `KV_REST_API_URL`/`KV_REST_API_TOKEN` vars the integration sets.
 
 ```typescript
 import { Redis } from '@upstash/redis';
