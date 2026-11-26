@@ -117,7 +117,7 @@ export default async function Post({ params }: { params: { id: string } }) {
 
 ## Upstash Redis
 
-Use `@upstash/redis`. `Redis.fromEnv()` reads `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` or the `KV_REST_API_URL`/`KV_REST_API_TOKEN` vars the integration sets.
+Use `@upstash/redis`.
 
 ```typescript
 import { Redis } from '@upstash/redis';
